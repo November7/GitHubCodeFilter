@@ -1,2 +1,24 @@
-# GitHub-Code-Filter
-Moodle Plugin: GitHub Code Filter
+# Moodle Plugin: GitHub Code Filter
+
+## Overview
+The **GitHub Code Filter** plugin allows Moodle course creators to embed source code directly from GitHub into course content. By referencing a GitHub *raw* file URL, the plugin automatically fetches the code and displays it with syntax highlighting, making programming examples clear and visually engaging for students.
+
+## Features
+- Fetches code from **GitHub raw URLs** and inserts it into Moodle pages  
+- Supports **syntax highlighting** using Highlight.js  
+- Works with multiple programming languages (C++, Python, Java, PHP, etc.)  
+- Simple integration: just paste the GitHub raw link into your course content  
+- Lightweight and efficient — no manual copy-paste or duplication of code  
+
+## Installation
+1. Clone or download this repository  
+2. Copy the plugin folder into your Moodle installation under:  /filter/githubcode
+3. Log in as an administrator and navigate to:  
+**Site administration → Plugins → Manage filters**  
+4. Enable the **GitHub Code Filter**  
+
+## Usage
+Insert a GitHub raw file link inside a code block:
+
+```html
+<pre><code>https://raw.githubusercontent.com/user/repo/branch/file.py</code></pre>
