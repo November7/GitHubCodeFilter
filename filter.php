@@ -52,14 +52,44 @@ class filter_githubcode extends moodle_text_filter {
             $safe = htmlspecialchars($code, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
             $lang = 'plaintext';
-            if (preg_match('/\.py$/', $url)) $lang = 'python';
-            elseif (preg_match('/\.cpp$/', $url)) $lang = 'cpp';
-            elseif (preg_match('/\.js$/', $url)) $lang = 'javascript';
-            elseif (preg_match('/\.java$/', $url)) $lang = 'java';
-            elseif (preg_match('/\.php$/', $url)) $lang = 'php';
+            $map = [
+                'py'   => 'python',
+                'c'    => 'c',
+                'cpp'  => 'cpp',
+                'cs'   => 'csharp',
+                'js'   => 'javascript',
+                'java' => 'java',
+                'html' => 'html',
+                'htm'  => 'html',
+                'php'  => 'php',
+                'pas'  => 'pascal'
+            ];
+
+            if (preg_match('/\.([^.]+)$/i', $url, $m)) {
+                $ext = strtolower($m[1]);
+                if (isset($map[$ext])) $lang = $map[$ext];
+            }
+
+            $lines = explode("\n", $safe);
+            $numbers = '';
+            $i = 1;
+            foreach ($lines as $line) {
+                $numbers .= "{$i}\n";
+                $i++;
+            }           
+
+
 
             return "
-                <div class=\"githubcode-header\">Github code ({$lang})</div><pre><code class=\"language-{$lang}\">{$safe}</code></pre><div class=\"githubcode-footer\">Code fetched {$age} seconds ago from the GitHub repository: <a href=\"{$url}\" target=\"_blank\">{$url}</a></div>
+            <div class=\"githubcode-header\">GithubCode Filter</div>
+            <div class=\"githubcode-wrapper\">
+                <pre class=\"line-numbers\"><code>{$numbers}</code></pre>
+                <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
+            </div>
+            <div class=\"githubcode-footer\">
+                Code fetched {$age} seconds ago from the GitHub repository:
+                <a href=\"{$url}\" target=\"_blank\">{$url}</a>
+            </div>
             ";
         }, $text);
     }
