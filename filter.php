@@ -78,8 +78,6 @@ class filter_githubcode extends moodle_text_filter {
                 $i++;
             }           
 
-
-
             return "
             <div class=\"githubcode-header\">GithubCode Filter</div>
             <div class=\"githubcode-wrapper\">
