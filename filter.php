@@ -59,11 +59,7 @@ class filter_githubcode extends moodle_text_filter {
             elseif (preg_match('/\.php$/', $url)) $lang = 'php';
 
             return "
-                <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
-                <div style=\"font-size:0.9em;color:#999;margin-top:-10px\">
-                    Kod pobrany z repozytorium GitHub (przed {$age} sekundami):
-                    <a style=\"color:#999\" href=\"{$url}\" target=\"_blank\">{$url}</a> 
-                </div>
+                <div class=\"githubcode-header\">Github code ({$lang})</div><pre><code class=\"language-{$lang}\">{$safe}</code></pre><div class=\"githubcode-footer\">Code fetched {$age} seconds ago from the GitHub repository: <a href=\"{$url}\" target=\"_blank\">{$url}</a></div>
             ";
         }, $text);
     }
