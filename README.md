@@ -18,7 +18,7 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 4. Enable the **GitHub Code Filter**  
 
 ## Usage
-Insert a GitHub raw file link inside a code block:
+Insert a GitHub raw file link within a page or other activities:
 
 ```html
-<pre><code>https://raw.githubusercontent.com/user/repo/branch/file.py</code></pre>
+https://raw.githubusercontent.com/user/repo/branch/file.py
