@@ -22,15 +22,6 @@ class filter_githubcode extends moodle_text_filter {
             $url = trim($matches[1], "\"' \t\n\r");
             $url = str_replace('/refs/heads/', '/', $url);
 
-            $params = [];
-            if (!empty($matches[2])) {
-                $rawParams = explode(';', $matches[2]);
-                foreach ($rawParams as $param) {
-                    list($key, $value) = explode('=', $param, 2);
-                    $params[trim($key)] = trim($value);
-                }
-            }
-
             // Cache API Moodle
             $cache = cache::make('filter_githubcode', 'githubcode');
             $key = md5($url);
