@@ -86,7 +86,7 @@ class filter_githubcode extends moodle_text_filter {
             </div>
             <div class=\"githubcode-footer\">
                 Code fetched {$age} seconds ago from the GitHub repository:
-                <a href=\"{$url}\" target=\"_blank\">{$url}</a>
+                <a href=\"{$url}\" target=\"_blank\">github.com...</a>
             </div>
             ";
         }, $text);
