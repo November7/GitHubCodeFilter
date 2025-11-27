@@ -16,11 +16,20 @@ class filter_githubcode extends moodle_text_filter {
             $resourcesloaded = true;
         }
 
-        $pattern = '/<a[^>]+href="(https:\/\/raw\.githubusercontent\.com\/[^"]+)"[^>]*>.*?<\/a>/i';
+        $pattern = '/\{?(https:\/\/raw\.githubusercontent\.com\/[^}|]+)\|?([^}]*)\}?/i';
 
         return preg_replace_callback($pattern, function($matches) {
             $url = trim($matches[1], "\"' \t\n\r");
             $url = str_replace('/refs/heads/', '/', $url);
+
+            $params = [];
+            if (!empty($matches[2])) {
+                $rawParams = explode(';', $matches[2]);
+                foreach ($rawParams as $param) {
+                    list($key, $value) = explode('=', $param, 2);
+                    $params[trim($key)] = trim($value);
+                }
+            }
 
             // Cache API Moodle
             $cache = cache::make('filter_githubcode', 'githubcode');
