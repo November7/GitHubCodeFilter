@@ -36,7 +36,8 @@ class filter_githubcode extends moodle_text_filter {
                 curl_close($ch);
 
                 if ($code === false || $httpcode !== 200) {
-                    return '<div style="color:red">Błąd pobierania z GitHub: ' . htmlspecialchars($url) . ' (HTTP ' . $httpcode . ')</div>';
+                    $safeUrl = htmlspecialchars($url);
+                    return "<div style='color:red'>Failed to retrieve from GitHub: {$safeUrl} HTTP {$httpcode}</div>";
                 }
 
                 $data = [
