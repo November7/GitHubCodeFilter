@@ -16,7 +16,7 @@ class filter_githubcode extends moodle_text_filter {
             $resourcesloaded = true;
         }
 
-        $pattern = '/\{?(https:\/\/raw\.githubusercontent\.com\/[^}|]+)\|?([^}]*)\}?/i';
+        $pattern = '/<a[^>]+href="(https:\/\/raw\.githubusercontent\.com\/[^"]+)"[^>]*>.*?<\/a>/i';
 
         return preg_replace_callback($pattern, function($matches) {
             $url = trim($matches[1], "\"' \t\n\r");
