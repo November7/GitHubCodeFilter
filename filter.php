@@ -16,18 +16,45 @@ class filter_githubcode extends moodle_text_filter {
             $resourcesloaded = true;
         }
 
-        $pattern = '/<a[^>]+href="(https:\/\/raw\.githubusercontent\.com\/[^"]+)"[^>]*>.*?<\/a>/i';
+        $pattern = '/\{githubcode\s+([^}]+)\}/i';
 
         return preg_replace_callback($pattern, function($matches) {
-            $url = trim($matches[1], "\"' \t\n\r");
+            $inside = $matches[1];
+            $tokens = preg_split('/\s+/', $inside);
+
+            $params = [];
+            foreach ($tokens as $t) {
+                if (strpos($t, '=') !== false) {
+                    [$k, $v] = explode('=', $t, 2);
+                    $params[strtolower($k)] = trim($v, "\"'");
+                } else {
+                    $params[strtolower($t)] = true; // flaga
+                }
+            }
+
+            if (empty($params['href'])) {
+                return "<div style='color:red'>Missing href in githubcode tag</div>";
+            }
+
+            $url = $params['href'] ?? '';
+
+            if (preg_match('/href\s*=\s*(["\'])(.*?)\1/i', $url, $m)) {
+                $url = $m[2];
+            }
+
+            $url = preg_replace('/">.*$/', '', $url);
+            $url = trim($url, " \t\n\r\"'");
             $url = str_replace('/refs/heads/', '/', $url);
+            if (!preg_match('#^https?://#i', $url)) {
+                $url = 'https://' . ltrim($url, '/');
+            }
 
             // Cache API Moodle
             $cache = cache::make('filter_githubcode', 'githubcode');
             $key = md5($url);
 
-            $data = $cache->get($key);
-            if ($data === false || !is_array($data)) {
+            $cached = $cache->get($key);
+            if ($cached === false || !is_array($cached)) {
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -40,18 +67,19 @@ class filter_githubcode extends moodle_text_filter {
                     return "<div style='color:red'>Failed to retrieve from GitHub: {$safeUrl} HTTP {$httpcode}</div>";
                 }
 
-                $data = [
+                $cached = [
                     'code' => $code,
                     'time' => time()
                 ];
-                $cache->set($key, $data);
+                $cache->set($key, $cached);
             }
 
-            $code = $data['code'];
-            $age  = time() - $data['time']; 
+            $code = $cached['code'];
+            $age  = time() - $cached['time'];
 
             $safe = htmlspecialchars($code, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
+            // Rozpoznanie języka po rozszerzeniu
             $lang = 'plaintext';
             $map = [
                 'py'   => 'python',
@@ -65,24 +93,26 @@ class filter_githubcode extends moodle_text_filter {
                 'php'  => 'php',
                 'pas'  => 'pascal'
             ];
-
             if (preg_match('/\.([^.]+)$/i', $url, $m)) {
                 $ext = strtolower($m[1]);
                 if (isset($map[$ext])) $lang = $map[$ext];
             }
 
-            $lines = explode("\n", $safe);
+            $linenumbers = !empty($params['linenumbers']) && $params['linenumbers'] != '0';
             $numbers = '';
-            $i = 1;
-            foreach ($lines as $line) {
-                $numbers .= "{$i}\n";
-                $i++;
-            }           
+            if ($linenumbers) {
+                $lines = explode("\n", $safe);
+                $i = 1;
+                foreach ($lines as $line) {
+                    $numbers .= "{$i}\n";
+                    $i++;
+                }
+            }
 
             return "
             <div class=\"githubcode-header\">GithubCode Filter</div>
             <div class=\"githubcode-wrapper\">
-                <pre class=\"line-numbers\"><code>{$numbers}</code></pre>
+                ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
                 <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
             </div>
             <div class=\"githubcode-footer\">
@@ -93,3 +123,4 @@ class filter_githubcode extends moodle_text_filter {
         }, $text);
     }
 }
+?>
