@@ -108,16 +108,19 @@ class filter_githubcode extends moodle_text_filter {
                     $i++;
                 }
             }
+            $theme = !empty($params['theme']) ? $params['theme'] : 'blue';
 
             return "
-            <div class=\"githubcode-header\">GithubCode Filter</div>
-            <div class=\"githubcode-wrapper\">
-                ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
-                <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
-            </div>
-            <div class=\"githubcode-footer\">
-                Code fetched {$age} seconds ago from the GitHub repository:
-                <a href=\"{$url}\" target=\"_blank\">github.com...</a>
+            <div class=\"githubcode-container githubcode-{$theme}\" >
+                <div class=\"githubcode-header\">GithubCode Filter</div>
+                <div class=\"githubcode-wrapper\">
+                    ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
+                    <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
+                </div>
+                <div class=\"githubcode-footer\">
+                    Code fetched {$age} seconds ago from the GitHub repository:
+                    <a href=\"{$url}\" target=\"_blank\">github.com...</a>
+                </div>
             </div>
             ";
         }, $text);

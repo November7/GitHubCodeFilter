@@ -1,4 +1,7 @@
 /*!
+  
+!!! Based on default highlight.js stylewith modifications for GitHubCode filter !!!
+
   Theme: Default
   Description: Original highlight.js style
   Author: (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
@@ -7,6 +10,14 @@
   License: see project LICENSE
   Touched: 2021
 */
+.githubcode-container {
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  width: 85%;
+}
+
 .githubcode-wrapper {
   display: flex;
   align-items: flex-start;
@@ -15,86 +26,95 @@
   font-family: monospace;
   font-size: 15px;
   line-height: 1.4;
-  background: #F3F3F3; 
 }
 
 .githubcode-wrapper .line-numbers {
-  flex: 0 0 4em;         
-  color: #999;
+  flex: 0 0 4em;
   text-align: right;
   padding-right: 8px;
   user-select: none;
 }
 
-.githubcode-wrapper pre code.hljs {
-  padding: 10px;       /* usuń domyślny padding */
-  margin: 0;        /* usuń margines */
-}
 .githubcode-wrapper pre {
-  margin: 0;
-}
-
-
-.githubcode-wrapper pre {
-  flex: 1;             
+  flex: 1;
   margin: 0;
   overflow-x: auto;
 }
 
-.githubcode-header + pre {
-    margin-bottom: 0;
+.githubcode-wrapper pre code.hljs {
+  padding: 10px;
+  margin: 0;
 }
 
 .githubcode-header {
-    text-align: right;
-    font-size: 0.9em;
-    color: #ccc;
-    background-color: #777; 
-    padding: 4px 8px;
-    border-radius: 4px 4px 0 0; 
-    /* margin-bottom: -8px;  */
+  text-align: right;
+  font-size: 0.9em;
+  padding: 4px 8px;
 }
 
 .githubcode-footer {
-    font-size: 0.9em;
-    color: #ccc;
-    background-color: #777; 
-    padding: 4px 8px;
-    /* margin-top: -8px;  */
-    border-radius: 0 0 4px 4px; 
+  font-size: 0.9em;
+  padding: 4px 8px;
 }
+
 .githubcode-footer a {
-    color: #ccc;
+  text-decoration: none;
+}
+.githubcode-footer a:hover {
+  text-decoration: underline;
 }
 
-.githubcode-footer a:hover {  
-  color: #ccc;  
-    text-decoration: underline;
+/* Dark Style */
+.githubcode-dark .githubcode-wrapper {
+  background: #cfcece;
+  color: #ddd;
+}
+.githubcode-dark .line-numbers {
+  color: #888;
+}
+.githubcode-dark .githubcode-header,
+.githubcode-dark .githubcode-footer {
+  background-color: #444;
+  color: #ccc;
+}
+.githubcode-dark .githubcode-footer a {
+  color: rgba(200,200,200,0.4);
 }
 
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
+/* Light Style */
+.githubcode-light .githubcode-wrapper {
+  background: #f9f9f9;
+  color: #333;
 }
-code.hljs {
-  padding: 3px 5px
+.githubcode-light .line-numbers {
+  color: #999;
 }
-/*!
-  Theme: Default
-  Description: Original highlight.js style
-  Author: (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
-  Maintainer: @highlightjs/core-team
-  Website: https://highlightjs.org/
-  License: see project LICENSE
-  Touched: 2021
-*/
-/*
-This is left on purpose making default.css the single file that can be lifted
-as-is from the repository directly without the need for a build step
+.githubcode-light .githubcode-header,
+.githubcode-light .githubcode-footer {
+  background-color: #e0e0e0;
+  color: #444;
+}
+.githubcode-light .githubcode-footer a {
+  color: #444;
+}
 
-Typically this "required" baseline CSS is added by `makestuff.js` during build.
-*/
+/* blue style */
+.githubcode-blue .githubcode-wrapper {
+  background: #eaf3ff;
+  color: #003366;
+}
+.githubcode-blue .line-numbers {
+  color: #336699;
+}
+.githubcode-blue .githubcode-header,
+.githubcode-blue .githubcode-footer {
+  background-color: #336699;
+  color: #fff;
+}
+.githubcode-blue .githubcode-footer a {
+  color: #cce0ff;
+}
+
 pre code.hljs {
   display: block;
   overflow-x: auto;
@@ -105,7 +125,7 @@ code.hljs {
 }
 /* end baseline CSS */
 .hljs {
-  background: #F3F3F3;
+  /* background: #F3F3F3; */
   color: #444
 }
 /* Base color: saturation 0; */
