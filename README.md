@@ -17,8 +17,25 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 **Site administration → Plugins → Manage filters**  
 4. Enable the **GitHub Code Filter**  
 
+## Available parameters
+- href (required)
+- linenumbers
+- theme
+  - dark
+  - blue
+  - light
+
 ## Usage
 Insert a GitHub raw file link within a page or other activities:
 
-```html
-https://raw.githubusercontent.com/user/repo/branch/file.py
+```text
+{githubcode href=raw.githubusercontent.com/user/repo/main/example.cpp linenumbers theme=dark}
+```
+or
+```text
+{githubcode href=https://raw.githubusercontent.com/user/repo/main/example.cpp linenumbers theme=dark}
+```
+or
+```text
+{githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers theme=dark}
+```
