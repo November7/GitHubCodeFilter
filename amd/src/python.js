@@ -2,6 +2,7 @@
 // keywords: max. 4 groups
 // ver: 0.1 [2022.11.26]
 // ver: 2.0 [2023.11.25]
+// ver: 2.0 [2025.12.02] moving to new repo
 
 define([], function () {
 

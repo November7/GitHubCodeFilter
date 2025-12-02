@@ -16,7 +16,7 @@ class filter_githubcode extends moodle_text_filter {
         //     $resourcesloaded = true;
         // }
 
-        $PAGE->requires->js_call_amd('filter_githubcode/highlight', 'init', array($CFG->wwwroot));
+        $PAGE->requires->js_call_amd('filter_githubcode/syntaxhighlighter', 'init', array($CFG->wwwroot));
 
         $pattern = '/\{githubcode\s+([^}]+)\}/i';
 
@@ -115,7 +115,7 @@ class filter_githubcode extends moodle_text_filter {
             return "
             <div class=\"githubcode-container githubcode-{$theme}\" >
                 <div class=\"githubcode-header\"><a href='https://github.com/November7/GitHubCodeFilter' target='_blank'>GithubCode Filter ver 0.1</a></div>
-                <div class=\"githubcode-wrapper\">
+                <div class=\"githubcode-wrapper syntaxhighlighter\">
                     ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
                     <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
                 </div>
