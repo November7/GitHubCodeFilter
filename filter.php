@@ -9,12 +9,14 @@ class filter_githubcode extends moodle_text_filter {
             return $text;
         }
 
-        static $resourcesloaded = false;
-        if (!$resourcesloaded) {
-            $PAGE->requires->js(new moodle_url('/filter/githubcode/js/highlight.min.js'));
-            $PAGE->requires->js_init_code('document.addEventListener("DOMContentLoaded", () => { if (window.hljs) hljs.highlightAll(); });');
-            $resourcesloaded = true;
-        }
+        // static $resourcesloaded = false;
+        // if (!$resourcesloaded) {
+        //     // $PAGE->requires->js(new moodle_url('/filter/githubcode/js/highlight.min.js'));
+        //     // $PAGE->requires->js_init_code('document.addEventListener("DOMContentLoaded", () => { if (window.hljs) hljs.highlightAll(); });');
+        //     $resourcesloaded = true;
+        // }
+
+        $PAGE->requires->js_call_amd('filter_githubcode/highlight', 'init', array($CFG->wwwroot));
 
         $pattern = '/\{githubcode\s+([^}]+)\}/i';
 
