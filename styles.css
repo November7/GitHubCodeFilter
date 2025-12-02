@@ -72,7 +72,9 @@
 .githubcode-dark .line-numbers {
   color: #888;
 }
+
 .githubcode-dark .githubcode-header,
+.githubcode-dark .githubcode-header a,
 .githubcode-dark .githubcode-footer {
   background-color: #444;
   color: #ccc;
@@ -90,6 +92,7 @@
   color: #999;
 }
 .githubcode-light .githubcode-header,
+.githubcode-light .githubcode-header a,
 .githubcode-light .githubcode-footer {
   background-color: #e0e0e0;
   color: #444;
@@ -107,6 +110,7 @@
   color: #336699;
 }
 .githubcode-blue .githubcode-header,
+.githubcode-blue .githubcode-header a,
 .githubcode-blue .githubcode-footer {
   background-color: #336699;
   color: #fff;
