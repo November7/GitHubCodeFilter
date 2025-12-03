@@ -1,13 +1,52 @@
 // ver: 2.0 [2025.12.02] moving to new repo
 
 
-define(['jquery'], function(/*$*/) {
+define(['jquery'], function($) {
     return {
         init: function() {
             window.console.log("Syntax highlighter init 3.1");
-        },
-        highlight: function(/*code, langname*/) {
-            // to be implemented
+
+/*************************************************************************************/
+/*      Metody pomocnicze do ekstrakcji i przetwarzania kodu źródłowego              */
+/*************************************************************************************/
+            $.fn.extractCodeData = function() {
+                let codeEl = $(this).find("code.githubcode").first();
+                if (!codeEl.length) {return null;}
+
+                return {
+                    code: codeEl.text(),
+                    classes: codeEl.attr("class") || "",
+                    attrs: codeEl.prop("attributes")
+                };
+            };
+
+/*************************************************************************************/
+/*      Konwersja na wieloliniowy format HTML                                        */
+/*************************************************************************************/
+
+            $.fn.convertToMultiline = function(code) {
+                let lines = code.replace(/\n$/, "").split("\n");
+                let html = "";
+
+                lines.forEach(function(line) {
+                    html += "<span class='line'>" +  $("<div>").text(line).html() + "</span>\n";
+                });
+
+                $(this).html(html);
+                return this;
+            };
+
+/*************************************************************************************/
+/*      Parsowanie kodu                                                              */
+/*************************************************************************************/
+            $(".githubcode").each(function() {
+                window.console.log("Processing element: ", this);
+                let codeData = $(this).extractCodeData();
+                if (codeData === null) {return;}
+                window.console.log("Processing code with classes: " + codeData.code);
+                window.console.log("Processing code with classes: " + codeData.classes);
+                window.console.log("Processing code with classes: " + codeData.attrs);
+            });
         },
     };
 });
