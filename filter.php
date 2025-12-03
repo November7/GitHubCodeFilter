@@ -9,13 +9,6 @@ class filter_githubcode extends moodle_text_filter {
             return $text;
         }
 
-        // static $resourcesloaded = false;
-        // if (!$resourcesloaded) {
-        //     // $PAGE->requires->js(new moodle_url('/filter/githubcode/js/highlight.min.js'));
-        //     // $PAGE->requires->js_init_code('document.addEventListener("DOMContentLoaded", () => { if (window.hljs) hljs.highlightAll(); });');
-        //     $resourcesloaded = true;
-        // }
-
         $PAGE->requires->js_call_amd('filter_githubcode/syntaxhighlighter', 'init', array($CFG->wwwroot));
 
         $pattern = '/\{githubcode\s+([^}]+)\}/i';
@@ -101,6 +94,7 @@ class filter_githubcode extends moodle_text_filter {
             }
 
             $linenumbers = !empty($params['linenumbers']) && $params['linenumbers'] != '0';
+            
             $numbers = '';
             if ($linenumbers) {
                 $lines = explode("\n", $safe);
@@ -114,21 +108,7 @@ class filter_githubcode extends moodle_text_filter {
 
             $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
 
-            return "<pre><code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{($linenumbers ? '1' : '0')}' data-title='{$title}'>{$safe}</code></pre>";
-
-            // return "
-            // <div class=\"githubcode-container githubcode-{$theme}\" >
-            //     <div class=\"githubcode-header\"><a href='https://github.com/November7/GitHubCodeFilter' target='_blank'>GithubCode Filter ver 0.1</a></div>
-            //     <div class=\"githubcode-wrapper syntaxhighlighter\">
-            //         ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
-            //         <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
-            //     </div>
-            //     <div class=\"githubcode-footer\">
-            //         Code fetched {$age} seconds ago from the GitHub repository:
-            //         <a href=\"{$url}\" target=\"_blank\">github.com...</a>
-            //     </div>
-            // </div>
-            // ";
+            return "<pre><code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{$linenumbers}' data-title='{$title}'>{$safe}</code></pre>";
         }, $text);
     }
 }

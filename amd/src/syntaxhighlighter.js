@@ -1,150 +1,79 @@
+// AMD module for syntax highlighter
+
 // ver: 2.0 [2025.12.02] moving to new repo
 
-
 define(['jquery'], function($) {
+/**
+     * Escapuje znaki specjalne HTML.
+     * @param {string} raw - surowy kod
+     * @returns {string} - kod z encjami (&lt;, &gt;, &amp;)
+     */
+    function escape(raw) {
+        return $("<div>").text(raw).html();
+    }
+
+/**
+* Code & params extractor
+* @param {jQuery} $block - jQuery object containing the code block
+* @returns {Object} - Extracted code and parameters
+*/
+    function extract($block) {
+        let code = $block.find('code.githubcode').first();
+        if(code.length === 0) {
+            return null;
+        }
+
+        let attrs = {};
+        $.each(code.prop("attributes"), function() {
+            if (this.name !== "class") {
+                attrs[this.name] = this.value;
+            }
+        });
+        return {
+            code: code.text(),
+            classes: code.attr("class") || "",
+            attrs: attrs
+        };
+    }
+
+/**
+* Podmienia zawartość <pre> na finalny <code>:
+* @param {Object} classes - klasy do dodania do elementu code
+* @param {Object} code - kod do sparsowania
+* @returns {string} newCode - sparsowany kod
+*/
+    function final(classes, code) {
+        return $("<code>").attr("class", classes).html(code);
+    }
+/**
+* Dzieli kod na linie i opakowuje każdą linię w span.line:
+* @param {Object} code - kod do sparsowania
+* @returns {string} newCode - sparsowany kod
+*/
+    function lines(code) {
+        let lines = code.replace(/\n$/, "").split("\n");
+        let newCode = "";
+
+        lines.forEach(function(line) {
+            newCode += "<span class='line'>" +  escape(line) + "</span>\n";
+        });
+        return newCode;
+    }
+
     return {
         init: function() {
-            window.console.log("Syntax highlighter init 3.1");
+            $("pre:has(code.githubcode)").each(function() {
+                let extractedCode = extract($(this));
+                if (!extractedCode) { return; }
+                else {
+                    window.console.log("Attributes:", extractedCode.attrs);
+                }
 
-/*************************************************************************************/
-/*      Metody pomocnicze do ekstrakcji i przetwarzania kodu źródłowego              */
-/*************************************************************************************/
-            $.fn.extractCodeData = function() {
-                let codeEl = $(this).find("code.githubcode").first();
-                if (!codeEl.length) {return null;}
+                let parsedCode = lines(extractedCode.code);
+                let newCode = final(extractedCode.classes, parsedCode);
+                $(this).empty().append(newCode);
 
-                return {
-                    code: codeEl.text(),
-                    classes: codeEl.attr("class") || "",
-                    attrs: codeEl.prop("attributes")
-                };
-            };
-
-/*************************************************************************************/
-/*      Konwersja na wieloliniowy format HTML                                        */
-/*************************************************************************************/
-
-            $.fn.convertToMultiline = function(code) {
-                let lines = code.replace(/\n$/, "").split("\n");
-                let html = "";
-
-                lines.forEach(function(line) {
-                    html += "<span class='line'>" +  $("<div>").text(line).html() + "</span>\n";
-                });
-
-                $(this).html(html);
-                return this;
-            };
-
-/*************************************************************************************/
-/*      Parsowanie kodu                                                              */
-/*************************************************************************************/
-            $(".githubcode").each(function() {
-                window.console.log("Processing element: ", this);
-                let codeData = $(this).extractCodeData();
-                if (codeData === null) {return;}
-                window.console.log("Processing code with classes: " + codeData.code);
-                window.console.log("Processing code with classes: " + codeData.classes);
-                window.console.log("Processing code with classes: " + codeData.attrs);
             });
-        },
+        }
     };
 });
-
-// define(['jquery'], function($) {
-//     return {
-//         init: function() {
-//             window.console.log("Syntax highlighter init 3.0");
-//             $.fn.parseCodeSplit = function(regexp,type) {
-//                 let splitHtml = $(this).html().split(/(<span.*?\/span>)/gi);
-//                 for(let i=0;i<splitHtml.length;i+=2)
-//                 {
-//                     splitHtml[i] = splitHtml[i].replace(regexp,'<span class="'+type+'">$1</span>');
-//                 }
-//                 return splitHtml.join("");
-//             };
-
-//             $.fn.parseCode = function(regexp,type) {
-
-//                 return $(this).html().replace(regexp,'<span class="'+type+'">$1</span>');
-//             };
-
-//             $.fn.matchCode = function(regexp) {
-//                 let splitHtml = $(this).html().split(/(<span.*?\/span>)/gi);
-//                 for(let i=0;i<splitHtml.length;i+=2)
-//                 {
-//                     if(splitHtml[i].match(regexp)) {return true;}
-//                 }
-//                 return false;
-//             };
-
-//             // $(".chParser_JS").each(function() {
-//             $(".syntaxhighlighter").each(function() {
-//                 /// do przerobienia
-//                 // window.console.log(this.className);
-//                 let re = RegExp("chLang_([a-zA-Z]+)","gm");
-//                 let strippedLangName;
-//                 strippedLangName = re.exec(this.className);
-//                 // window.console.log("Lang "+strippedLangName[1]);
-//                 let langname = strippedLangName[1];
-//                 if($.inArray(langname, ['cpp','python','cmd','php']) < 0) {return;}
-//                 ////////////////////////////
-//                 let pres = $(this).find("td:eq(1) pre" );
-//                 require(['filter_codehighlighter/'+langname], function(lang_data) {
-//                     if(lang_data == undefined) {return;}
-//                     let artx = [];
-//                     lang_data.text.forEach(function(el) {
-//                         artx.push("\\"+el+".*?"+"\\"+el);
-//                     });
-//                     let regtx = new RegExp("("+artx.join('|')+")","g");
-//                     let regky = [];
-//                     for(let k in lang_data.keywords) {
-//                         if (lang_data.keywords.hasOwnProperty(k)) {
-//                             regky.push(new RegExp("\\b("+
-//                             lang_data.keywords[k].join("|")+
-//                             ")\\b",lang_data.casesensitive[k]?"g":"gi"));
-//                         }
-//                     }
-//                     // window.console.log(regky);
-//                     let regcm = [];
-//                     lang_data.comment.forEach(function(el) {
-//                         regcm.push(el+".*");
-//                     });
-//                     for(let i=0;i<lang_data.multicomment.length;i+=2) {
-//                         regcm.push(lang_data.multicomment[i]+".*?"+lang_data.multicomment[i+1]);
-//                     }
-//                     pres.each(function() {
-//                         $(this).html($(this).parseCodeSplit(regtx,'text'));
-//                     });
-//                     for(let i=0;i<lang_data.multicomment.length;i+=2) {
-//                         let cs = 0;
-//                         let mc_b = lang_data.multicomment[i];
-//                         let mc_e = lang_data.multicomment[i+1];
-//                         pres.each(function() {
-//                             if(cs) {
-//                                 $(this).html($(this).parseCode(new RegExp("(^.*?($|"+mc_e+"))","g"),'multicomment'));
-//                                 if($(this).html().match(new RegExp("("+mc_e+")"),"g")) {
-//                                     cs = 0;
-//                                 }
-//                             }
-//                             else {
-//                                 $(this).html($(this).parseCode(new RegExp("("+regcm.join("|")+")"),'comment'));
-//                             }
-//                             let rmc_b = new RegExp("("+mc_b + "((?!"+mc_e + ").)*$)","g");
-//                             if($(this).matchCode(rmc_b)) {
-//                                 $(this).html($(this).parseCode(rmc_b,'multicomment'));
-//                                 cs = 1;
-//                             }
-//                         });
-//                     }
-//                     pres.each(function() {
-//                         for(let i=0;i<regky.length;++i) {
-//                             $(this).html($(this).parseCodeSplit(regky[i],'keyword'+(i+1)));
-//                         }
-//                         $(this).html($(this).parseCodeSplit(new RegExp("\\b("+lang_data.number+")\\b","g"),'dec-number'));
-//                     });
-//                 });
-//             });
-//         }
-//     };
-// });

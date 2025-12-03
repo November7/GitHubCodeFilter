@@ -5,9 +5,8 @@
 // ver: 2.0 [2025.12.02] moving to new repo
 
 define([], function () {
-
-return {
-        ver: "2.0.3",
+    return {
+        ver: "2.1",
         langname: 'Python',
         casesensitive: {
             lv1: true,
@@ -17,23 +16,33 @@ return {
         },
         keywords: {
             lv1: [
+                // sterowanie przepływem i konstrukcje języka
                 'for','while',
                 'if','elif','else',
-                'return','True','False','None',
-                'def','class','pass','in','import','as',
-                'with','try','raise','finally','except'
+                'return','yield',
+                'True','False','None',
+                'def','class','pass','in','is',
+                'import','from','as',
+                'with','try','raise','finally','except',
+                'break','continue','global','nonlocal','assert','del'
             ],
             lv2: [
+                // typy wbudowane i operatory logiczne
                 'int','float','str',
                 'bool','bytes','complex',
-                'list','touple','set','dict','range',
+                'list','tuple','set','dict','range',
+                'frozenset','memoryview',
                 'and','or','not'
             ],
             lv3: [
-                'self','cls','staticmethod','classmethod' //can't contain @ because of \b in regexp
+                // kontekstowe słowa kluczowe i metody klas
+                'self','cls',
+                'staticmethod','classmethod','property',
+                'async','await'
             ],
             lv4: [
-                'print','input'
+                // funkcje wbudowane najczęściej używane
+                'print','input','len','open','type','isinstance','dir','help','id'
             ]
         },
         number: '[0-9]+',
