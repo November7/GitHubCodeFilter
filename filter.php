@@ -112,19 +112,23 @@ class filter_githubcode extends moodle_text_filter {
             }
             $theme = !empty($params['theme']) ? $params['theme'] : 'blue';
 
-            return "
-            <div class=\"githubcode-container githubcode-{$theme}\" >
-                <div class=\"githubcode-header\"><a href='https://github.com/November7/GitHubCodeFilter' target='_blank'>GithubCode Filter ver 0.1</a></div>
-                <div class=\"githubcode-wrapper syntaxhighlighter\">
-                    ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
-                    <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
-                </div>
-                <div class=\"githubcode-footer\">
-                    Code fetched {$age} seconds ago from the GitHub repository:
-                    <a href=\"{$url}\" target=\"_blank\">github.com...</a>
-                </div>
-            </div>
-            ";
+            $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
+
+            return "<pre><code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{($linenumbers ? '1' : '0')}' data-title='{$title}'>{$safe}</code></pre>";
+
+            // return "
+            // <div class=\"githubcode-container githubcode-{$theme}\" >
+            //     <div class=\"githubcode-header\"><a href='https://github.com/November7/GitHubCodeFilter' target='_blank'>GithubCode Filter ver 0.1</a></div>
+            //     <div class=\"githubcode-wrapper syntaxhighlighter\">
+            //         ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
+            //         <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
+            //     </div>
+            //     <div class=\"githubcode-footer\">
+            //         Code fetched {$age} seconds ago from the GitHub repository:
+            //         <a href=\"{$url}\" target=\"_blank\">github.com...</a>
+            //     </div>
+            // </div>
+            // ";
         }, $text);
     }
 }
