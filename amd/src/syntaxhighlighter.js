@@ -46,17 +46,30 @@ define(['jquery'], function($) {
     function final(code, classes, attrs) {
         let container = $("<div>").addClass("githubcode-container");
 
-        let header = $("<div>").addClass("githubcode-header")
-        .append(
-            $("<span>")
-                .addClass("title")
-                .text(attrs['data-title'] || "")
-        )
-        .append(
-            $("<span>")
-                .addClass("language")
-                .text(attrs['data-lang'] || "Plain Text")
-        );
+        let header = $("<div>")
+            .addClass("githubcode-header")            
+            .append(
+                $("<span>")
+                    .addClass("language")
+                    .text(attrs['data-lang'] || "Plain Text")
+                )
+            .append(
+                $("<span>")
+                    .addClass("title")
+                    .text(attrs['data-title'] || "")
+                )
+            .append(
+                $("<span>")
+                .addClass("github-link")
+                .attr("title", "GithubCodeFilter on GitHub")
+                .html(
+                    $("<a>")
+                        .attr("href", 'https://github.com/November7/GitHubCodeFilter' || "#")
+                        .attr("target", "_blank")
+                        .attr("rel", "noopener noreferrer")
+                        .append($("<i>").addClass("fab fa-github"))
+                    )
+                );
 
         let codeBlock = $("<pre>").append(
             $("<code>")
@@ -66,9 +79,42 @@ define(['jquery'], function($) {
 
         let footer = $("<div>")
             .addClass("githubcode-footer")
-            .text("Stopka");
+            .append(
+                $("<span>")
+                    .addClass("zebra-toggle")
+                    .attr("title", "Toggle zebra-style")
+                    .on("click", function() {
+                        $(".githubcode-container").toggleClass("zebra-on");
+                    }).html($("<i>")).addClass("fa-solid fa-grip-lines")
+            )
+            .append(
+                $("<span>")
+                    .addClass("lines-toggle")
+                    .attr("title", "Toggle line numbers")
+                    .on("click", function() {
+                        $(".githubcode-container").toggleClass("lines-off");
+                    }).html($("<i>")).addClass("fa-solid fa-1")
+            )
+            .append(
+                $("<span>")
+                    .addClass("cache-icon")
+                    .attr("title", "Code fetched from github.com " + attrs['data-age'] + " seconds ago")
+                    .html($("<i>")).addClass("fa-regular fa-clock")
+            )
+            .append(
+                $("<span>")
+                    .addClass("source-link")
+                    .html(
+                        $("<a>")
+                            .attr("href", attrs['data-href'] || "#")
+                            .attr("target", "_blank")
+                            .attr("rel", "noopener noreferrer")
+                            .append($("<i>").addClass("fa-solid fa-anchor"))
+                    )
+            );
+            
 
-        container.append(header, codeBlock, footer);
+        container.append(header, codeBlock,  footer);
         return container;
     }
 

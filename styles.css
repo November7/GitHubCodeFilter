@@ -8,40 +8,76 @@ Author: Marcin Kowalski
 
 /* global styles for githubcode filter */
 
+div.githubcode-container {
+    box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    width: 85%;
+}
+
+div.githubcode-container pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    overflow: auto;
+}
+
 code.githubcode {
     font-family: Consolas, "Liberation Mono", Courier, monospace;
     font-size: 13px;
     line-height: 1.4em;
     white-space: pre;
     display: block;
-    padding: 10px;
-    margin-bottom: 1em;
+    padding: 2px;
     counter-reset: line;
 }
 
+.githubcode-container code.githubcode span.line {
+    background: none;
+}
+
+.githubcode-container.zebra-on code.githubcode span.line:nth-child(odd) {
+    background: #fafafa;
+}
+.githubcode-container.zebra-on code.githubcode span.line:nth-child(even) {
+    background: #f0f0f0;
+}
+
 code.githubcode span.line {
+    display: inline-block;
+    width: 100%;
     white-space: pre;
+}
+
+.githubcode-container.lines-off code.githubcode span.line::before {
+    background: #fafafa;
+    content: none;
+    display: none;
+    margin: 0;
 }
 
 code.githubcode span.line::before {
     counter-increment: line;
     content: counter(line);
     display: inline-block;
-    width: 3em;
+    width: 2em;
     margin-right: 1em;
     color: #888;
     text-align: right;
+    padding-right: 5px;
+    border-right: 1px solid #ccc;
 }
 
 .githubcode-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f5f5f5;
+    background: #d6d6d6;
     padding: 4px 8px;
     font-family: sans-serif;
     font-size: 13px;
     border-bottom: 1px solid #ddd;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 .githubcode-header .title {
@@ -54,6 +90,36 @@ code.githubcode span.line::before {
     color: #666;
 }
 
+.githubcode-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #d6d6d6;
+    padding: 4px 8px;
+    font-family: sans-serif;
+    font-size: 13px;
+    border-top: 1px solid #ddd;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.githubcode-footer .zebra-toggle,
+.githubcode-footer .lines-toggle,
+.githubcode-footer .cache-icon,
+.githubcode-footer .source-link {
+    cursor: pointer;
+    margin-right: 10px;
+    color: #8a8a8a;
+    font-size: 10px;
+}
+
+.githubcode-footer .source-link {
+    margin-left: auto;
+}
+
+.githubcode-footer .source-link a:hover {
+    text-decoration: none;
+}
 
 /* syntax highlighting styles */
 
@@ -89,7 +155,5 @@ code.githubcode span.dec-number {
 }
 
 
-/* dark style */
 /* blue style */
-/* light style */
 

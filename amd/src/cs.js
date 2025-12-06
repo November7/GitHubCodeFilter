@@ -31,7 +31,7 @@ define([], function () {
                 'void','enum','struct','class','interface',
                 'const','static','readonly','volatile',
                 'abstract','sealed','override','virtual','new',
-                'async','await'
+                'async','await','namespace',
             ],
             lv3: [
                 'base','this','typeof','sizeof','nameof',

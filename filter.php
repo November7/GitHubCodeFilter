@@ -98,7 +98,15 @@ class filter_githubcode extends moodle_text_filter {
 
             $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
 
-            return "<code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{$linenumbers}' data-title='{$title}' data-age='{$age}'>{$safe}</code>";
+            return "
+            <code class='githubcode githubcode-{$theme}'
+                data-lang='{$lang}' 
+                data-linenumbers='{$linenumbers}'
+                data-title='{$title}' 
+                data-age='{$age}'
+                data-href='{$url}'>{$safe}
+            </code>
+            ";
         }, $text);
     }
 }
