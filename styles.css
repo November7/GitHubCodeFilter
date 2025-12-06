@@ -27,7 +27,7 @@ code.githubcode {
     line-height: 1.4em;
     white-space: pre;
     display: block;
-    padding: 2px;
+    /* padding: 2px; */
     counter-reset: line;
 }
 
@@ -35,10 +35,10 @@ code.githubcode {
     background: none;
 }
 
-.githubcode-container.zebra-on code.githubcode span.line:nth-child(odd) {
+.githubcode-container.zebra-on code.githubcode-light span.line:nth-child(odd) {
     background: #fafafa;
 }
-.githubcode-container.zebra-on code.githubcode span.line:nth-child(even) {
+.githubcode-container.zebra-on code.githubcode-light span.line:nth-child(even) {
     background: #f0f0f0;
 }
 
@@ -154,6 +154,72 @@ code.githubcode span.dec-number {
     font-weight: bold;
 }
 
-
 /* blue style */
 
+.githubcode-container.zebra-on code.githubcode-blue span.line:nth-child(odd) {
+    background: #eceff8;
+}
+.githubcode-container.zebra-on code.githubcode-blue span.line:nth-child(even) {
+    background: #dae2fa;
+}
+
+code.githubcode span.line {
+    display: inline-block;
+    width: 100%;
+    white-space: pre;
+}
+
+.githubcode-container.lines-off code.githubcode-blue span.line::before {
+    background-color: #369;
+    content: none;
+    display: none;
+    margin: 0;
+}
+
+code.githubcode-blue span.line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2em;
+    margin-right: 1em;
+    color: #369;
+    text-align: right;
+    padding-right: 5px;
+    border-right: 1px solid #ccc;
+}
+
+code.githubcode-blue .githubcode-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #369;
+    padding: 4px 8px;
+    font-family: sans-serif;
+    font-size: 13px;
+    border-bottom: 1px solid #ddd;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+code.githubcode-blue .githubcode-header .title {
+    font-weight: bold;
+    color: #fff;
+}
+
+code.githubcode-blue .githubcode-header .language {
+    font-style: italic;
+    color: #fff;
+}
+
+code.githubcode-blue .githubcode-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #369;
+    padding: 4px 8px;
+    font-family: sans-serif;
+    font-size: 13px;
+    border-top: 1px solid #ddd;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
