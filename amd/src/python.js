@@ -16,7 +16,6 @@ define([], function () {
         },
         keywords: {
             lv1: [
-                // sterowanie przepływem i konstrukcje języka
                 'for','while',
                 'if','elif','else',
                 'return','yield',
@@ -27,7 +26,6 @@ define([], function () {
                 'break','continue','global','nonlocal','assert','del'
             ],
             lv2: [
-                // typy wbudowane i operatory logiczne
                 'int','float','str',
                 'bool','bytes','complex',
                 'list','tuple','set','dict','range',
@@ -35,13 +33,11 @@ define([], function () {
                 'and','or','not'
             ],
             lv3: [
-                // kontekstowe słowa kluczowe i metody klas
                 'self','cls',
                 'staticmethod','classmethod','property',
                 'async','await'
             ],
             lv4: [
-                // funkcje wbudowane najczęściej używane
                 'print','input','len','open','type','isinstance','dir','help','id'
             ]
         },

@@ -4,12 +4,11 @@
 // ver: 2.0 [2023.11.25]
 // ver: 2.0 [2025.12.02] moving to new repo
 // ver: 2.1 [2025.12.03] added C/C++/C# keywords
-// ver: 2.2 [2025.12.06] pure C++ keywords
 
 define([], function () {
     return {
-        ver: "2.2",
-        langname: 'C++',
+        ver: "2.1",
+        langname: 'C',
         casesensitive: {
             lv1: true,
             lv2: true,
@@ -23,32 +22,26 @@ define([], function () {
                 'break','continue','goto',
                 'switch','case','default',
                 'typedef','sizeof',
-                'public','protected','private',
-                'try','throw','catch',
-                'using','namespace',
-                'return',
-                'true','false','nullptr'
+                'return'
             ],
             lv2: [
-                'char','bool','int','float','double','void','enum',
-                'struct','union','class',
+                'char','int','float','double','void','enum',
+                'struct','union',
                 'signed','unsigned','long','short',
-                'volatile','const','static','auto','register',
-                'virtual','friend','override',
-                'delete','new','operator'
+                'volatile','const','static','auto','register'
             ],
             lv3: [
                 'NULL','FILE','size_t'
             ],
             lv4: [
-                'cout','endl','cin'
+                'printf','scanf'
             ]
         },
         number: '[0-9]+',
         text: ['"','\''],
         intxt: 'lLuU',
         realxt: 'fF',
-        comment: ['\\/\\/'],
-        multicomment: ['\\/\\*','\\*\\/']  //pair begin => end
+        comment: ['\\/\\/','#'],
+        multicomment: ['\\/\\*','\\*\\/'] //pair begin => end
     };
 });

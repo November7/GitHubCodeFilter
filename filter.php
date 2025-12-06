@@ -80,13 +80,13 @@ class filter_githubcode extends moodle_text_filter {
                 'py'   => 'python',
                 'c'    => 'c',
                 'cpp'  => 'cpp',
-                'cs'   => 'csharp',
+                'cs'   => 'cs',
                 'js'   => 'javascript',
-                'java' => 'java',
-                'html' => 'html',
-                'htm'  => 'html',
-                'php'  => 'php',
-                'pas'  => 'pascal'
+                // 'java' => 'java',
+                // 'html' => 'html',
+                // 'htm'  => 'html',
+                // 'php'  => 'php',
+                // 'pas'  => 'pascal'
             ];
             if (preg_match('/\.([^.]+)$/i', $url, $m)) {
                 $ext = strtolower($m[1]);
@@ -94,21 +94,11 @@ class filter_githubcode extends moodle_text_filter {
             }
 
             $linenumbers = !empty($params['linenumbers']) && $params['linenumbers'] != '0';
-            
-            $numbers = '';
-            if ($linenumbers) {
-                $lines = explode("\n", $safe);
-                $i = 1;
-                foreach ($lines as $line) {
-                    $numbers .= "{$i}\n";
-                    $i++;
-                }
-            }
             $theme = !empty($params['theme']) ? $params['theme'] : 'blue';
 
             $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
 
-            return "<pre><code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{$linenumbers}' data-title='{$title}'>{$safe}</code></pre>";
+            return "<code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{$linenumbers}' data-title='{$title}' data-age='{$age}'>{$safe}</code>";
         }, $text);
     }
 }
