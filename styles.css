@@ -59,35 +59,28 @@ code.githubcode span.line::before {
     padding: 4px 8px;
     font-family: sans-serif;
     font-size: 13px;
-    background: #d6d6d6;
-}
-
-.githubcode-header {
-    border-bottom: 1px solid #ddd;
-}
-
-.githubcode-footer {
-    border-top: 1px solid #ddd;
 }
 
 .githubcode-header .title {
     font-weight: bold;
-    color: #333;
 }
 
-.githubcode-header .language {
-    font-style: italic;
-    color: #666;
-}
+.githubcode-header { border-bottom-width: 1px; border-bottom-style: solid; }
+.githubcode-footer { border-top-width: 1px; border-top-style: solid; }
 
 .githubcode-footer .zebra-toggle,
 .githubcode-footer .lines-toggle,
 .githubcode-footer .cache-icon,
 .githubcode-footer .source-link {
     cursor: pointer;
-    margin-right: 10px;
     color: #8a8a8a;
     font-size: 10px;
+}
+
+.githubcode-footer .zebra-toggle,
+.githubcode-footer .lines-toggle,
+.githubcode-footer .cache-icon {
+    margin-right: 10px;
 }
 
 .githubcode-footer .source-link {
@@ -116,7 +109,23 @@ code.githubcode span.line::before {
 
 .githubcode-light span.line::before {
     color: #888;
-    border-color: #ccc;
+    border-color: #bbb;
+}
+
+.githubcode-light .githubcode-header,
+.githubcode-light .githubcode-footer {
+    background-color: #d6d6d6;
+    border-color: #bbb;
+}
+
+.githubcode-light .githubcode-header .title,
+.githubcode-light .githubcode-header .language,
+.githubcode-light .githubcode-header a,
+.githubcode-light .githubcode-footer .zebra-toggle,
+.githubcode-light .githubcode-footer .lines-toggle,
+.githubcode-light .githubcode-footer .cache-icon,
+.githubcode-light .githubcode-footer .source-link a {
+    color: #333;
 }
 
 /***************************************************************************
@@ -147,7 +156,10 @@ code.githubcode span.line::before {
 .githubcode-blue .githubcode-header,
 .githubcode-blue .githubcode-footer {
     background-color: #0f6cbf;
+    border-color: #b3c7f7;
 }
+
+
 
 .githubcode-blue .githubcode-header .title,
 .githubcode-blue .githubcode-header .language,
@@ -186,6 +198,9 @@ code.githubcode span.line::before {
     background: #2a2a2a;
     border-color: #444;
 }
+
+/* .githubcode-dark .githubcode-header { border-bottom-width: 1px; border-bottom-style: solid; }
+.githubcode-dark .githubcode-footer { border-top-width: 1px; border-top-style: solid; } */
 
 .githubcode-dark .githubcode-header .title,
 .githubcode-dark .githubcode-header .language,
