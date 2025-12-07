@@ -45,8 +45,8 @@ define([], function () {
         },
         number: '[0-9]+',
         text: ['"','\''],
-        intxt: '',       // w C# nie ma sufiksów lLuU jak w C++
-        realxt: 'fFdDmM',// sufiksy dla literałów float/double/decimal
+        intxt: '',       
+        realxt: 'fFdDmM',
         comment: ['\\/\\/'],
         multicomment: ['\\/\\*','\\*\\/'] //pair begin => end
     };

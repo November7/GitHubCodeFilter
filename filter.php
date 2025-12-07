@@ -83,8 +83,8 @@ class filter_githubcode extends moodle_text_filter {
                 'cs'   => 'cs',
                 'js'   => 'javascript',
                 // 'java' => 'java',
-                // 'html' => 'html',
-                // 'htm'  => 'html',
+                'html' => 'javascript',
+                'htm'  => 'javascript',
                 // 'php'  => 'php',
                 // 'pas'  => 'pascal'
             ];

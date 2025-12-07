@@ -134,7 +134,6 @@ define(['jquery'], function($) {
                     )
             );
             
-
         container.append(header, codeBlock,  footer);
         return container;
     }
@@ -190,27 +189,40 @@ define(['jquery'], function($) {
                     extractedCode.attrs['data-lang'] = lang_data.langname || langname;
                     let segs = [{ html: escape(extractedCode.code), cls: null }];
 
-                    segs = splitByRegex(segs, new RegExp("(" + lang_data.comment.join("|") + ".*)", "g"), "comment");
+                    //fix multi-line comments
                     for (let i = 0; i < lang_data.multicomment.length; i += 2) {
-                        let re = new RegExp(lang_data.multicomment[i] + ".*?" + lang_data.multicomment[i+1], "gs");
+                        let open = lang_data.multicomment[i];
+                        let close = lang_data.multicomment[i + 1];
+                        let re = new RegExp(open + "[\\s\\S]*?" + close, "g");
                         segs = splitByRegex(segs, re, "comment");
                     }
 
-                    let artx = lang_data.text.map(el => "\\"+el+".*?\\"+el);
+                    segs = splitByRegex(segs, new RegExp("(" + lang_data.comment.join("|") + ".*)", "g"), "comment");
+                    
+                    //fix
+                    let artx = lang_data.text.map(el => "\\" + el + "[\\s\\S]*?\\" + el);
+
                     let regtx = new RegExp("(" + artx.join("|") + ")", "g");
                     segs = splitByRegex(segs, regtx, "string");
 
                     for (let k in lang_data.keywords) {
-                        let re = new RegExp("\\b(" + lang_data.keywords[k].join("|") + 
-                        ")\\b", lang_data.casesensitive[k] ? "g" : "gi");
-                        segs = splitByRegex(segs, re, "keyword-"+k);
+                        let flags = lang_data.casesensitive[k] ? "g" : "gi";
+                        let re = new RegExp("\\b(" + lang_data.keywords[k].join("|") + ")\\b", flags);
+                        segs = splitByRegex(segs, re, "keyword-" + k);
                     }
                     
                     let regNum = new RegExp("\\b(" + lang_data.number + ")\\b", "g");
                     segs = splitByRegex(segs, regNum, "dec-number");
 
+                    //fix
                     let safeCode = segs.map(s => s.cls ? `<span class='${s.cls}'>${s.html}</span>` : s.html).join("");
-
+                    safeCode = safeCode.replace(/<span class='(comment|string)'>([\s\S]*?)<\/span>/g,
+                        (_, cls, content) => {
+                            return content.split("\n")
+                            .map(part => `<span class='${cls}'>${part}</span>`)
+                            .join("\n");
+                        }
+                    );
                     let parsedCode = lines(safeCode);
                     let newCode = final(parsedCode, extractedCode.classes, extractedCode.attrs);
                     $(this).replaceWith(newCode); 

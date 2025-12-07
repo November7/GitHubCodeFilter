@@ -48,7 +48,7 @@ define([], function () {
         text: ['"','\''],
         intxt: 'lLuU',
         realxt: 'fF',
-        comment: ['\\/\\/'],
+        comment: ['\\/\\/','#'],
         multicomment: ['\\/\\*','\\*\\/']  //pair begin => end
     };
 });
