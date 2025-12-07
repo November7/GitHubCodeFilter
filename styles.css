@@ -1,23 +1,25 @@
-/*
+/***************************************************************************
 styles.css
-Gtihubcode filter styles
-Version 1.0
-Build date: 2025.12.06
+GithubCode Filter Styles
+Version 1.1
+Build date: 2025.12.07
 Author: Marcin Kowalski
-*/
+***************************************************************************/
 
-/* global styles for githubcode filter */
+/***************************************************************************
+                                Base styles
+***************************************************************************/
 
-div.githubcode-container {
-    box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.15);
+.githubcode-container {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
     border-radius: 6px;
     width: 85%;
+    overflow: hidden;
 }
 
-div.githubcode-container pre {
+.githubcode-container pre {
     margin: 0;
     border: none;
-    border-radius: 0;
     overflow: auto;
 }
 
@@ -27,32 +29,14 @@ code.githubcode {
     line-height: 1.4em;
     white-space: pre;
     display: block;
-    /* padding: 2px; */
     counter-reset: line;
-}
-
-.githubcode-container code.githubcode span.line {
-    background: none;
-}
-
-.githubcode-container.zebra-on code.githubcode-light span.line:nth-child(odd) {
-    background: #fafafa;
-}
-.githubcode-container.zebra-on code.githubcode-light span.line:nth-child(even) {
-    background: #f0f0f0;
 }
 
 code.githubcode span.line {
     display: inline-block;
     width: 100%;
+    padding-left: 5px;
     white-space: pre;
-}
-
-.githubcode-container.lines-off code.githubcode span.line::before {
-    background: #fafafa;
-    content: none;
-    display: none;
-    margin: 0;
 }
 
 code.githubcode span.line::before {
@@ -60,24 +44,30 @@ code.githubcode span.line::before {
     content: counter(line);
     display: inline-block;
     width: 2em;
-    margin-right: 1em;
-    color: #888;
+    margin-right: 5px;
     text-align: right;
     padding-right: 5px;
-    border-right: 1px solid #ccc;
+    border-right-width: 1px;
+    border-right-style: solid;
 }
 
-.githubcode-header {
+.githubcode-header,
+.githubcode-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #d6d6d6;
     padding: 4px 8px;
     font-family: sans-serif;
     font-size: 13px;
+    background: #d6d6d6;
+}
+
+.githubcode-header {
     border-bottom: 1px solid #ddd;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+}
+
+.githubcode-footer {
+    border-top: 1px solid #ddd;
 }
 
 .githubcode-header .title {
@@ -88,19 +78,6 @@ code.githubcode span.line::before {
 .githubcode-header .language {
     font-style: italic;
     color: #666;
-}
-
-.githubcode-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #d6d6d6;
-    padding: 4px 8px;
-    font-family: sans-serif;
-    font-size: 13px;
-    border-top: 1px solid #ddd;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
 }
 
 .githubcode-footer .zebra-toggle,
@@ -117,109 +94,114 @@ code.githubcode span.line::before {
     margin-left: auto;
 }
 
-.githubcode-footer .source-link a:hover {
-    text-decoration: none;
-}
+/***************************************************************************
+                                Light theme
+***************************************************************************/
 
-/* syntax highlighting styles */
+.githubcode-light code.githubcode span.comment      { color: #697070; }
+.githubcode-light code.githubcode span.string       { color: #d14; }
+.githubcode-light code.githubcode span.keyword-lv1  { color: #008000; font-weight: bold; }
+.githubcode-light code.githubcode span.keyword-lv2  { color: #0f0080; font-weight: bold; }
+.githubcode-light code.githubcode span.keyword-lv3  { color: #803300; font-weight: bold; }
+.githubcode-light code.githubcode span.keyword-lv4  { color: #800057; font-weight: bold; }
+.githubcode-light code.githubcode span.dec-number   { color: #bd0e0e; font-weight: bold; }
 
-code.githubcode span.comment {
-    color: #697070;
-}
-code.githubcode span.string {
-    color: #d14;
-}
+.githubcode-light.zebra-on span.line:nth-child(odd)  { background: #fafafa; }
+.githubcode-light.zebra-on span.line:nth-child(even) { background: #f0f0f0; }
 
-code.githubcode span.keyword-lv1 {
-    color: #008000;
-    font-weight: bold;
-}
-
-code.githubcode span.keyword-lv2 {
-    color: #0f0080;
-    font-weight: bold;
-}
-
-code.githubcode span.keyword-lv3 {
-    color: #803300;
-    font-weight: bold;
-}
-
-code.githubcode span.keyword-lv4 {
-    color: #800057;
-    font-weight: bold;
-}
-code.githubcode span.dec-number {
-    color: #bd0e0e;
-    font-weight: bold;
-}
-
-/* blue style */
-
-.githubcode-container.zebra-on code.githubcode-blue span.line:nth-child(odd) {
-    background: #eceff8;
-}
-.githubcode-container.zebra-on code.githubcode-blue span.line:nth-child(even) {
-    background: #dae2fa;
-}
-
-code.githubcode span.line {
-    display: inline-block;
-    width: 100%;
-    white-space: pre;
-}
-
-.githubcode-container.lines-off code.githubcode-blue span.line::before {
-    background-color: #369;
+.githubcode-light.lines-off span.line::before {
     content: none;
     display: none;
-    margin: 0;
 }
 
-code.githubcode-blue span.line::before {
-    counter-increment: line;
-    content: counter(line);
-    display: inline-block;
-    width: 2em;
-    margin-right: 1em;
-    color: #369;
-    text-align: right;
-    padding-right: 5px;
-    border-right: 1px solid #ccc;
+.githubcode-light span.line::before {
+    color: #888;
+    border-color: #ccc;
 }
 
-code.githubcode-blue .githubcode-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #369;
-    padding: 4px 8px;
-    font-family: sans-serif;
-    font-size: 13px;
-    border-bottom: 1px solid #ddd;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+/***************************************************************************
+                                Blue theme
+***************************************************************************/
+
+.githubcode-blue code.githubcode span.comment      { color: #697070; }
+.githubcode-blue code.githubcode span.string       { color: #d14; }
+.githubcode-blue code.githubcode span.keyword-lv1  { color: #008000; font-weight: bold; }
+.githubcode-blue code.githubcode span.keyword-lv2  { color: #0f0080; font-weight: bold; }
+.githubcode-blue code.githubcode span.keyword-lv3  { color: #803300; font-weight: bold; }
+.githubcode-blue code.githubcode span.keyword-lv4  { color: #800057; font-weight: bold; }
+.githubcode-blue code.githubcode span.dec-number   { color: #bd0e0e; font-weight: bold; }
+
+.githubcode-blue.zebra-on span.line:nth-child(odd)  { background: #fbfbfb; }
+.githubcode-blue.zebra-on span.line:nth-child(even) { background: #e8f4ff; }
+
+.githubcode-blue.lines-off span.line::before {
+    content: none;
+    display: none;
 }
 
-code.githubcode-blue .githubcode-header .title {
-    font-weight: bold;
+.githubcode-blue span.line::before {
+    color: #0f6cbf;
+    border-right-color: #b3c7f7;
+}
+
+.githubcode-blue .githubcode-header,
+.githubcode-blue .githubcode-footer {
+    background-color: #0f6cbf;
+}
+
+.githubcode-blue .githubcode-header .title,
+.githubcode-blue .githubcode-header .language,
+.githubcode-blue .githubcode-header a,
+.githubcode-blue .githubcode-footer .zebra-toggle,
+.githubcode-blue .githubcode-footer .lines-toggle,
+.githubcode-blue .githubcode-footer .cache-icon,
+.githubcode-blue .githubcode-footer .source-link a {
     color: #fff;
 }
 
-code.githubcode-blue .githubcode-header .language {
-    font-style: italic;
-    color: #fff;
+/***************************************************************************
+                                Dark theme
+***************************************************************************/
+
+.githubcode-dark {
+    background: #1e1e1e;
+    color: #ddd;
 }
 
-code.githubcode-blue .githubcode-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #369;
-    padding: 4px 8px;
-    font-family: sans-serif;
-    font-size: 13px;
-    border-top: 1px solid #ddd;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
+.githubcode-dark.zebra-on span.line:nth-child(odd)  { background: #1e1e1e; }
+.githubcode-dark.zebra-on span.line:nth-child(even) { background: #232323; }
+
+.githubcode-dark.lines-off span.line::before {
+    content: none;
+    display: none;
 }
+
+.githubcode-dark span.line::before {
+    color: #777;
+    border-right: 1px solid #444;
+}
+
+.githubcode-dark .githubcode-header,
+.githubcode-dark .githubcode-footer {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+.githubcode-dark .githubcode-header .title,
+.githubcode-dark .githubcode-header .language,
+.githubcode-dark .githubcode-header a,
+.githubcode-dark .githubcode-footer .zebra-toggle,
+.githubcode-dark .githubcode-footer .lines-toggle,
+.githubcode-dark .githubcode-footer .cache-icon,
+.githubcode-dark .githubcode-footer .source-link a {
+    color: #ccc;
+}
+
+.githubcode-dark code.githubcode                   { color: #bbb;}
+.githubcode-dark code.githubcode span.comment      { color: #6a9955; }
+.githubcode-dark code.githubcode span.string       { color: #ce9178; }
+.githubcode-dark code.githubcode span.keyword-lv1  { color: #569cd6; font-weight: bold; }
+.githubcode-dark code.githubcode span.keyword-lv2  { color: #c586c0; font-weight: bold; }
+.githubcode-dark code.githubcode span.keyword-lv3  { color: #dcdcaa; font-weight: bold; }
+.githubcode-dark code.githubcode span.keyword-lv4  { color: #4ec9b0; font-weight: bold; }
+.githubcode-dark code.githubcode span.dec-number   { color: #b5cea8; font-weight: bold; }

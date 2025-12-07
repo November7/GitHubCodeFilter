@@ -44,7 +44,9 @@ define(['jquery'], function($) {
     * @returns {string} newCode - sparsowany kod
     */
     function final(code, classes, attrs) {
-        let container = $("<div>").addClass("githubcode-container");
+        let container = $("<div>")
+            .addClass("githubcode-container")
+            .addClass(attrs['data-theme'] ? "githubcode-" + attrs['data-theme'] : "light");
 
         let header = $("<div>")
             .addClass("githubcode-header")            
@@ -84,22 +86,41 @@ define(['jquery'], function($) {
                     .addClass("zebra-toggle")
                     .attr("title", "Toggle zebra-style")
                     .on("click", function() {
-                        $(".githubcode-container").toggleClass("zebra-on");
-                    }).html($("<i>")).addClass("fa-solid fa-grip-lines")
+                        $(this).closest(".githubcode-container").toggleClass("zebra-on");
+                    })
+                    .append($("<i>").addClass("fa-solid fa-grip-lines"))                    
             )
             .append(
                 $("<span>")
                     .addClass("lines-toggle")
                     .attr("title", "Toggle line numbers")
                     .on("click", function() {
-                        $(".githubcode-container").toggleClass("lines-off");
-                    }).html($("<i>")).addClass("fa-solid fa-1")
+                        $(this).closest(".githubcode-container").toggleClass("lines-off");
+                    })
+                    .append($("<i>").addClass("fa-solid fa-1"))
             )
             .append(
                 $("<span>")
                     .addClass("cache-icon")
                     .attr("title", "Code fetched from github.com " + attrs['data-age'] + " seconds ago")
-                    .html($("<i>")).addClass("fa-regular fa-clock")
+                    .append(
+                        $("<i>").addClass("fa-regular fa-clock")
+                    )
+                    .on("click", function() {
+                        let $icon = $(this);
+                        let text = $icon.attr("title");
+                        let $label = $icon.find(".cache-label");
+                        if ($label.length) {
+                            $label.remove();
+                        } else {
+                            $icon.append(
+                                $("<span>")
+                                    .addClass("cache-label")
+                                    .css({"margin-left":"6px"})
+                                    .text(text)
+                            );
+                        }
+                    })
             )
             .append(
                 $("<span>")
