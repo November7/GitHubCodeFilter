@@ -39,7 +39,7 @@ or
 ```text
 {githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers theme=dark}
 ```
-## Version History
+## Version history
 - **v0.1** - First working release: [githubcode v0.1.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v0.1.zip), based on *highlight.js*  
 - **v0.2** - Engine switched to a custom implementation (under construction)
 - **v0.9.8** - Early working release: [githubcode v0.9.8.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v0.9.8.zip), based on custom engine. Known issues: zebra-style with margins & multiline comment.
