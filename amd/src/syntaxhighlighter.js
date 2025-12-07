@@ -4,7 +4,6 @@
 // ver: 1.0.0 [2025.12.08] change versioning scheme (compatible with plugin versioning)
 
 define(['jquery'], function($) {
-
     /**
     * Escapuje znaki specjalne HTML.
     * @param {string} raw - surowy kod
