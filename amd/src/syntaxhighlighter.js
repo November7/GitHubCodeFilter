@@ -1,5 +1,7 @@
 // AMD module for syntax highlighter
 // ver: 4.0 [2025.12.06] moving to new repo
+// ver: 4.1 [2025.12.08] stable release (version 1.0.0) ->
+// ver: 1.0.0 [2025.12.08] change versioning scheme (compatible with plugin versioning)
 
 define(['jquery'], function($) {
 
