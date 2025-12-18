@@ -41,6 +41,6 @@ return {
         intxt: '',
         realxt: '',
         comment: ['#'],
-        multicomment: ["'''","'''"] //pair begin => end
+        multicomment: ["'''","'''",'"""','"""']  //pair begin => end
     };
 });
