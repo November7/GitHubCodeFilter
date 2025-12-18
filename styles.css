@@ -1,215 +1,222 @@
-/*!
-  
-!!! Based on default highlight.js stylewith modifications for GitHubCode filter !!!
+/***************************************************************************
+styles.css
+GithubCode Filter Styles
+Version 1.1
+Build date: 2025.12.07
+Author: Marcin Kowalski
+***************************************************************************/
 
-  Theme: Default
-  Description: Original highlight.js style
-  Author: (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
-  Maintainer: @highlightjs/core-team
-  Website: https://highlightjs.org/
-  License: see project LICENSE
-  Touched: 2021
-*/
+/***************************************************************************
+                                Base styles
+***************************************************************************/
+
 .githubcode-container {
-  margin: 1em 0;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  width: 85%;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    width: 85%;
+    overflow: hidden;
 }
 
-.githubcode-wrapper {
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: monospace;
-  font-size: 15px;
-  line-height: 1.4;
+.githubcode-container pre {
+    margin: 0;
+    border: none;
+    overflow: auto;
 }
 
-.githubcode-wrapper .line-numbers {
-  flex: 0 0 4em;
-  text-align: right;
-  padding-right: 8px;
-  user-select: none;
+code.githubcode {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-size: 13px;
+    line-height: 1.4em;
+    white-space: pre;
+    display: block;
+    counter-reset: line;
 }
 
-.githubcode-wrapper pre {
-  flex: 1;
-  margin: 0;
-  overflow-x: auto;
+code.githubcode span.line {
+    display: inline-block;
+    width: 100%;
+    padding-left: 5px;
+    white-space: pre;
 }
 
-.githubcode-wrapper pre code.hljs {
-  padding: 10px;
-  margin: 0;
+code.githubcode span.line::before {
+    counter-increment: line;
+    content: counter(line);
+    display: inline-block;
+    width: 2em;
+    margin-right: 5px;
+    text-align: right;
+    padding-right: 5px;
+    border-right-width: 1px;
+    border-right-style: solid;
 }
 
-.githubcode-header {
-  text-align: right;
-  font-size: 0.9em;
-  padding: 4px 8px;
-}
-
+.githubcode-header,
 .githubcode-footer {
-  font-size: 0.9em;
-  padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    font-family: sans-serif;
+    font-size: 13px;
 }
 
-.githubcode-footer a {
-  text-decoration: none;
-}
-.githubcode-footer a:hover {
-  text-decoration: underline;
+.githubcode-header .title {
+    font-weight: bold;
 }
 
-/* Dark Style */
-.githubcode-dark .githubcode-wrapper {
-  background: #cfcece;
-  color: #ddd;
+.githubcode-header { border-bottom-width: 1px; border-bottom-style: solid; }
+.githubcode-footer { border-top-width: 1px; border-top-style: solid; }
+
+.githubcode-footer .zebra-toggle,
+.githubcode-footer .lines-toggle,
+.githubcode-footer .cache-icon,
+.githubcode-footer .source-link {
+    cursor: pointer;
+    color: #8a8a8a;
+    font-size: 10px;
 }
-.githubcode-dark .line-numbers {
-  color: #888;
+
+.githubcode-footer .zebra-toggle,
+.githubcode-footer .lines-toggle,
+.githubcode-footer .cache-icon {
+    margin-right: 10px;
+}
+
+.githubcode-footer .source-link {
+    margin-left: auto;
+}
+
+/***************************************************************************
+                                Light theme
+***************************************************************************/
+
+.githubcode-light code.githubcode span.comment      { color: #697070; }
+.githubcode-light code.githubcode span.string       { color: #d14; }
+.githubcode-light code.githubcode span.keyword-lv1  { color: #008000; font-weight: bold; }
+.githubcode-light code.githubcode span.keyword-lv2  { color: #0f0080; font-weight: bold; }
+.githubcode-light code.githubcode span.keyword-lv3  { color: #803300; font-weight: bold; }
+.githubcode-light code.githubcode span.keyword-lv4  { color: #800057; font-weight: bold; }
+.githubcode-light code.githubcode span.dec-number   { color: #bd0e0e; font-weight: bold; }
+
+.githubcode-light.zebra-on span.line:nth-child(odd)  { background: #fafafa; }
+.githubcode-light.zebra-on span.line:nth-child(even) { background: #f0f0f0; }
+
+.githubcode-light.lines-off span.line::before {
+    content: none;
+    display: none;
+}
+
+.githubcode-light span.line::before {
+    color: #888;
+    border-color: #bbb;
+}
+
+.githubcode-light .githubcode-header,
+.githubcode-light .githubcode-footer {
+    background-color: #d6d6d6;
+    border-color: #bbb;
+}
+
+.githubcode-light .githubcode-header .title,
+.githubcode-light .githubcode-header .language,
+.githubcode-light .githubcode-header a,
+.githubcode-light .githubcode-footer .zebra-toggle,
+.githubcode-light .githubcode-footer .lines-toggle,
+.githubcode-light .githubcode-footer .cache-icon,
+.githubcode-light .githubcode-footer .source-link a {
+    color: #333;
+}
+
+/***************************************************************************
+                                Blue theme
+***************************************************************************/
+
+.githubcode-blue code.githubcode span.comment      { color: #697070; }
+.githubcode-blue code.githubcode span.string       { color: #d14; }
+.githubcode-blue code.githubcode span.keyword-lv1  { color: #008000; font-weight: bold; }
+.githubcode-blue code.githubcode span.keyword-lv2  { color: #0f0080; font-weight: bold; }
+.githubcode-blue code.githubcode span.keyword-lv3  { color: #803300; font-weight: bold; }
+.githubcode-blue code.githubcode span.keyword-lv4  { color: #800057; font-weight: bold; }
+.githubcode-blue code.githubcode span.dec-number   { color: #bd0e0e; font-weight: bold; }
+
+.githubcode-blue.zebra-on span.line:nth-child(odd)  { background: #fbfbfb; }
+.githubcode-blue.zebra-on span.line:nth-child(even) { background: #e8f4ff; }
+
+.githubcode-blue.lines-off span.line::before {
+    content: none;
+    display: none;
+}
+
+.githubcode-blue span.line::before {
+    color: #0f6cbf;
+    border-right-color: #b3c7f7;
+}
+
+.githubcode-blue .githubcode-header,
+.githubcode-blue .githubcode-footer {
+    background-color: #0f6cbf;
+    border-color: #b3c7f7;
+}
+
+
+
+.githubcode-blue .githubcode-header .title,
+.githubcode-blue .githubcode-header .language,
+.githubcode-blue .githubcode-header a,
+.githubcode-blue .githubcode-footer .zebra-toggle,
+.githubcode-blue .githubcode-footer .lines-toggle,
+.githubcode-blue .githubcode-footer .cache-icon,
+.githubcode-blue .githubcode-footer .source-link a {
+    color: #fff;
+}
+
+/***************************************************************************
+                                Dark theme
+***************************************************************************/
+
+.githubcode-dark {
+    background: #1e1e1e;
+    color: #ddd;
+}
+
+.githubcode-dark.zebra-on span.line:nth-child(odd)  { background: #1e1e1e; }
+.githubcode-dark.zebra-on span.line:nth-child(even) { background: #232323; }
+
+.githubcode-dark.lines-off span.line::before {
+    content: none;
+    display: none;
+}
+
+.githubcode-dark span.line::before {
+    color: #777;
+    border-right: 1px solid #444;
 }
 
 .githubcode-dark .githubcode-header,
-.githubcode-dark .githubcode-header a,
 .githubcode-dark .githubcode-footer {
-  background-color: #444;
-  color: #ccc;
-}
-.githubcode-dark .githubcode-footer a {
-  color: rgba(200,200,200,0.4);
+    background: #2a2a2a;
+    border-color: #444;
 }
 
-/* Light Style */
-.githubcode-light .githubcode-wrapper {
-  background: #f9f9f9;
-  color: #333;
-}
-.githubcode-light .line-numbers {
-  color: #999;
-}
-.githubcode-light .githubcode-header,
-.githubcode-light .githubcode-header a,
-.githubcode-light .githubcode-footer {
-  background-color: #e0e0e0;
-  color: #444;
-}
-.githubcode-light .githubcode-footer a {
-  color: #444;
+/* .githubcode-dark .githubcode-header { border-bottom-width: 1px; border-bottom-style: solid; }
+.githubcode-dark .githubcode-footer { border-top-width: 1px; border-top-style: solid; } */
+
+.githubcode-dark .githubcode-header .title,
+.githubcode-dark .githubcode-header .language,
+.githubcode-dark .githubcode-header a,
+.githubcode-dark .githubcode-footer .zebra-toggle,
+.githubcode-dark .githubcode-footer .lines-toggle,
+.githubcode-dark .githubcode-footer .cache-icon,
+.githubcode-dark .githubcode-footer .source-link a {
+    color: #ccc;
 }
 
-/* blue style */
-.githubcode-blue .githubcode-wrapper {
-  background: #eaf3ff;
-  color: #003366;
-}
-.githubcode-blue .line-numbers {
-  color: #336699;
-}
-.githubcode-blue .githubcode-header,
-.githubcode-blue .githubcode-header a,
-.githubcode-blue .githubcode-footer {
-  background-color: #336699;
-  color: #fff;
-}
-.githubcode-blue .githubcode-footer a {
-  color: #cce0ff;
-}
-
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
-/* end baseline CSS */
-.hljs {
-  /* background: #F3F3F3; */
-  color: #444
-}
-/* Base color: saturation 0; */
-.hljs-subst {
-  /* default */
-  
-}
-/* purposely ignored */
-.hljs-formula,
-.hljs-attr,
-.hljs-property,
-.hljs-params {
-  
-}
-.hljs-comment {
-  color: #697070
-}
-.hljs-tag,
-.hljs-punctuation {
-  color: #444a
-}
-.hljs-tag .hljs-name,
-.hljs-tag .hljs-attr {
-  color: #444
-}
-.hljs-keyword,
-.hljs-attribute,
-.hljs-selector-tag,
-.hljs-meta .hljs-keyword,
-.hljs-doctag,
-.hljs-name {
-  font-weight: bold
-}
-/* User color: hue: 0 */
-.hljs-type,
-.hljs-string,
-.hljs-number,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
-.hljs-template-tag,
-.hljs-deletion {
-  color: #880000
-}
-.hljs-title,
-.hljs-section {
-  color: #880000;
-  font-weight: bold
-}
-.hljs-regexp,
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-operator,
-.hljs-selector-pseudo {
-  color: #ab5656
-}
-/* Language color: hue: 90; */
-.hljs-literal {
-  color: #695
-}
-.hljs-built_in,
-.hljs-bullet,
-.hljs-code,
-.hljs-addition {
-  color: #397300
-}
-/* Meta color: hue: 200 */
-.hljs-meta {
-  color: #1f7199
-}
-.hljs-meta .hljs-string {
-  color: #38a
-}
-/* Misc effects */
-.hljs-emphasis {
-  font-style: italic
-}
-.hljs-strong {
-  font-weight: bold
-}
+.githubcode-dark code.githubcode                   { color: #bbb;}
+.githubcode-dark code.githubcode span.comment      { color: #6a9955; }
+.githubcode-dark code.githubcode span.string       { color: #ce9178; }
+.githubcode-dark code.githubcode span.keyword-lv1  { color: #569cd6; font-weight: bold; }
+.githubcode-dark code.githubcode span.keyword-lv2  { color: #c586c0; font-weight: bold; }
+.githubcode-dark code.githubcode span.keyword-lv3  { color: #dcdcaa; font-weight: bold; }
+.githubcode-dark code.githubcode span.keyword-lv4  { color: #4ec9b0; font-weight: bold; }
+.githubcode-dark code.githubcode span.dec-number   { color: #b5cea8; font-weight: bold; }

@@ -9,13 +9,6 @@ class filter_githubcode extends moodle_text_filter {
             return $text;
         }
 
-        // static $resourcesloaded = false;
-        // if (!$resourcesloaded) {
-        //     // $PAGE->requires->js(new moodle_url('/filter/githubcode/js/highlight.min.js'));
-        //     // $PAGE->requires->js_init_code('document.addEventListener("DOMContentLoaded", () => { if (window.hljs) hljs.highlightAll(); });');
-        //     $resourcesloaded = true;
-        // }
-
         $PAGE->requires->js_call_amd('filter_githubcode/syntaxhighlighter', 'init', array($CFG->wwwroot));
 
         $pattern = '/\{githubcode\s+([^}]+)\}/i';
@@ -87,13 +80,13 @@ class filter_githubcode extends moodle_text_filter {
                 'py'   => 'python',
                 'c'    => 'c',
                 'cpp'  => 'cpp',
-                'cs'   => 'csharp',
+                'cs'   => 'cs',
                 'js'   => 'javascript',
-                'java' => 'java',
-                'html' => 'html',
-                'htm'  => 'html',
-                'php'  => 'php',
-                'pas'  => 'pascal'
+                // 'java' => 'java',
+                'html' => 'javascript',
+                'htm'  => 'javascript',
+                // 'php'  => 'php',
+                // 'pas'  => 'pascal'
             ];
             if (preg_match('/\.([^.]+)$/i', $url, $m)) {
                 $ext = strtolower($m[1]);
@@ -101,34 +94,22 @@ class filter_githubcode extends moodle_text_filter {
             }
 
             $linenumbers = !empty($params['linenumbers']) && $params['linenumbers'] != '0';
-            $numbers = '';
-            if ($linenumbers) {
-                $lines = explode("\n", $safe);
-                $i = 1;
-                foreach ($lines as $line) {
-                    $numbers .= "{$i}\n";
-                    $i++;
-                }
-            }
             $theme = !empty($params['theme']) ? $params['theme'] : 'blue';
 
             $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
 
-            return "<pre><code class='githubcode githubcode-{$theme}' data-lang='{$lang}' data-linenumbers='{($linenumbers ? '1' : '0')}' data-title='{$title}'>{$safe}</code></pre>";
+            $theme = in_array($params['theme'], ['dark','light', 'blue']) ? $theme : 'light';
 
-            // return "
-            // <div class=\"githubcode-container githubcode-{$theme}\" >
-            //     <div class=\"githubcode-header\"><a href='https://github.com/November7/GitHubCodeFilter' target='_blank'>GithubCode Filter ver 0.1</a></div>
-            //     <div class=\"githubcode-wrapper syntaxhighlighter\">
-            //         ".($linenumbers ? "<pre class=\"line-numbers\"><code>{$numbers}</code></pre>" : "")."
-            //         <pre><code class=\"language-{$lang}\">{$safe}</code></pre>
-            //     </div>
-            //     <div class=\"githubcode-footer\">
-            //         Code fetched {$age} seconds ago from the GitHub repository:
-            //         <a href=\"{$url}\" target=\"_blank\">github.com...</a>
-            //     </div>
-            // </div>
-            // ";
+            return "
+            <code class='githubcode'
+                data-theme='{$theme}' 
+                data-lang='{$lang}' 
+                data-linenumbers='{$linenumbers}' 
+                data-title='{$title}' 
+                data-age='{$age}' 
+                data-href='{$url}'>{$safe}
+            </code>
+            ";
         }, $text);
     }
 }
