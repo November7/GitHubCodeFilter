@@ -93,12 +93,24 @@ class filter_githubcode extends moodle_text_filter {
                 if (isset($map[$ext])) $lang = $map[$ext];
             }
 
-            $linenumbers = !empty($params['linenumbers']) && $params['linenumbers'] != '0';
-            $theme = !empty($params['theme']) ? $params['theme'] : 'blue';
+            $defaulttheme = get_config('filter_githubcode', 'theme');
+            $theme = !empty($params['theme']) ? $params['theme'] : $defaulttheme;
+            $theme = in_array($theme, ['dark', 'light', 'blue']) ? $theme : 'blue';
+
+
+            $defaultlinenumbers = get_config('filter_githubcode', 'linenumbers');
+            if (isset($params['linenumbers'])) 
+            {
+                 $linenumbers = ($params['linenumbers'] !== 'off' && $params['linenumbers'] !== '0'); 
+            } 
+            else 
+            { 
+                $linenumbers = !empty($defaultlinenumbers) && $defaultlinenumbers != '0'; 
+            }
 
             $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
 
-            $theme = in_array($params['theme'], ['dark','light', 'blue']) ? $theme : 'light';
+            
 
             return "
             <code class='githubcode'
