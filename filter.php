@@ -109,14 +109,23 @@ class filter_githubcode extends moodle_text_filter {
             }
 
             $title = !empty($params['title']) ? htmlspecialchars($params['title']) : '';
-
             
+            $defaultzebrastyle = get_config('filter_githubcode', 'zebrastyle');
+            if (isset($params['zebrastyle'])) 
+            {
+                 $zebrastyle = ($params['zebrastyle'] !== 'off' && $params['zebrastyle'] !== '0'); 
+            } 
+            else 
+            { 
+                $zebrastyle = !empty($defaultzebrastyle) && $defaultzebrastyle != '0'; 
+            }
 
             return "
             <code class='githubcode'
                 data-theme='{$theme}' 
-                data-lang='{$lang}' 
+                data-lang='{$lang}'                 
                 data-linenumbers='{$linenumbers}' 
+                data-zebrastyle='{$zebrastyle}'
                 data-title='{$title}' 
                 data-age='{$age}' 
                 data-href='{$url}'>{$safe}

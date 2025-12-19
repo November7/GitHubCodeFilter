@@ -48,7 +48,8 @@ define(['jquery'], function($) {
         let container = $("<div>")
             .addClass("githubcode-container")
             .addClass(attrs['data-theme'] ? "githubcode-" + attrs['data-theme'] : "light")
-            .toggleClass("lines-off", attrs['data-linenumbers']);
+            .toggleClass("lines-off", attrs['data-linenumbers'] == 0)
+            .toggleClass("zebra-on", attrs['data-zebrastyle'] == 1);
 
         let header = $("<div>")
             .addClass("githubcode-header")            
