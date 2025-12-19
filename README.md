@@ -19,6 +19,8 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 
 ## Available parameters
 - href (required)
+- linenumbers[=off]
+- zebrastyle[=off]
 - theme
   - dark
   - blue
@@ -32,15 +34,16 @@ Insert a GitHub raw file link within a page or other activities:
 ```
 or
 ```text
-{githubcode href=https://raw.githubusercontent.com/user/repo/main/example.cpp linenumbers theme=dark}
+{githubcode href=https://raw.githubusercontent.com/user/repo/main/example.cpp linenumbers zebrastyle}
 ```
 or
 ```text
-{githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers theme=dark}
+{githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
 ```
 ## Version history
 - **v0.1** - First working release: [githubcode v0.1.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v0.1.zip), based on *highlight.js*  
 - **v0.2** - Engine switched to a custom implementation (under construction)
-- **v0.9.8** - Early working release: [githubcode v0.9.8.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v0.9.8.zip), based on custom engine. Known issues: zebra-style with margins & multiline comment.
-- **v1.0.0** - Stable (?) version: [githubcode v1.0.0.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v1.0.0.zip), based on custom engine. Known issues: multi-word title.
-- **v1.0.1** - New option in plugin settings: default theme. [githubcode v1.0.1.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v1.0.1.zip)
+- **v0.9.8** - Early working release based on custom engine. Known issues: zebra-style with margins & multiline comment.
+- **v1.0.0** - Stable (?) version, based on custom engine. Known issues: multi-word title.
+- **v1.0.1** - New option in plugin settings: default theme. 
+- **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row: [githubcode v1.0.2.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v1.0.2.zip)
