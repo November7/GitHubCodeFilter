@@ -4,7 +4,7 @@
 
 define([], function () {
     return {
-        ver: "0.1",
+        ver: "0.9",
         langname: 'JavaScript',
         casesensitive: {
             lv1: true,

@@ -47,7 +47,8 @@ define(['jquery'], function($) {
     function final(code, classes, attrs) {
         let container = $("<div>")
             .addClass("githubcode-container")
-            .addClass(attrs['data-theme'] ? "githubcode-" + attrs['data-theme'] : "light");
+            .addClass(attrs['data-theme'] ? "githubcode-" + attrs['data-theme'] : "light")
+            .toggleClass("lines-off", attrs['data-linenumbers']);
 
         let header = $("<div>")
             .addClass("githubcode-header")            
@@ -226,8 +227,7 @@ define(['jquery'], function($) {
                     );
                     let parsedCode = lines(safeCode);
                     let newCode = final(parsedCode, extractedCode.classes, extractedCode.attrs);
-                    $(this).replaceWith(newCode); 
-
+                    $(this).replaceWith(newCode);
                 }.bind(this));
             });
         }
