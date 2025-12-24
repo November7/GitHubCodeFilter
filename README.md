@@ -53,7 +53,7 @@ or
 ```
 or
 ```text
-{githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
+{githubcode href=<a href='https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
 ```
 
 ## Compatibility
