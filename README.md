@@ -20,12 +20,12 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/November7/GitHubCodeFilter)
 
 ## Version history
-- **v0.1** - First working release: [githubcode v0.1.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v0.1.zip), based on *highlight.js*  
+- **v0.1** - First working release based on *highlight.js*  
 - **v0.2** - Engine switched to a custom implementation (under construction)
 - **v0.9.8** - Early working release based on custom engine. Known issues: zebra-style with margins & multiline comment.
 - **v1.0.0** - Stable (?) version, based on custom engine. Known issues: multi-word title.
 - **v1.0.1** - New option in plugin settings: default theme. 
-- **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row: [githubcode v1.0.2.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v1.0.2.zip)
+- **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row.
 
 ## Available parameters
 - href (required)
