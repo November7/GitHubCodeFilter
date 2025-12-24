@@ -69,10 +69,10 @@ or
 - [ ] Fix existing themes  
 - [ ] Add additional themes  
 - [ ] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
-- [ ] Enable three‑way code insertion:
+- [ ] Enable three‑way code insertion:  
       - current: `{githubcode params}`  
-      - fallback block: `{githubcode params} ... {/githubcode}`  
-      - raw code block: `{rawcode params} ... {/rawcode}`  
+      - fallback block: `{githubcode params} fallback block {/githubcode}`  
+      - raw code block: `{rawcode params} inserted code block {/rawcode}`  
 
 ## Version history
 - **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row
