@@ -1,33 +1,45 @@
 # Moodle Plugin: GitHub Code Filter
 
-## Latest Release: 
 [![Latest Release](https://img.shields.io/github/v/release/November7/GitHubCodeFilter)](https://github.com/November7/GitHubCodeFilter/releases/latest)
+![Last Commit](https://img.shields.io/github/last-commit/November7/GitHubCodeFilter)
+![License](https://img.shields.io/github/license/November7/GitHubCodeFilter)
+
 
 ## Overview
 The **GitHub Code Filter** plugin allows Moodle course creators to embed source code directly from GitHub into course content. By referencing a GitHub *raw* file URL, the plugin automatically fetches the code and displays it with syntax highlighting, making programming examples clear and visually engaging for students.
 
+- **Type:** Moodle filter plugin  
+- **Directory:** `/filter/githubcode`  
+- **Purpose:** Embed GitHub raw code with syntax highlighting  
+- **Requires:** Moodle 4.x+  
+- **Maintainer:** Marcin (November7)  
+
+
 ## Features
 - Fetches code from **GitHub raw URLs** and inserts it into Moodle pages  
-- Supports **syntax highlighting** using Highlight.js  
-- Works with multiple programming languages (C++, Python, Java, PHP, etc.)  
-- Simple integration: just paste the GitHub raw link into your course content  
-- Lightweight and efficient — no manual copy-paste or duplication of code  
+- Automatic **syntax highlighting** (custom engine)  
+- Supports multiple languages (C++, Python, Java, PHP, etc.)  
+- Optional line numbers and zebra‑style rows  
+- Multiple themes: **light**, **dark**, **blue**  
+- Simple integration — just paste the GitHub raw link  
+- Lightweight and efficient
+- Built‑in caching of GitHub code to reduce bandwidth usage and improve performance
 
 ## Installation
-1. Clone or download this repository  
-2. Copy the plugin folder into your Moodle installation under:  /filter/githubcode or install using zip file
-3. Log in as an administrator and navigate to:  
-**Site administration → Plugins → Manage filters**  
-4. Enable the **GitHub Code Filter**  
+1. Download the latest ZIP from: **Releases → Latest**
+2. Log in as an administrator
+3. Extract and upload the plugin folder into: `/filter/githubcode` or install as an moodle administrator
+4. Navigate to: **Site administration → Plugins → Manage filters**  
+5. Enable **GitHub Code Filter**
 
 ## Available parameters
-- href (required)
-- linenumbers[=off]
-- zebrastyle[=off]
-- theme
-  - dark
-  - blue
-  - light
+| Parameter      | Required | Default | Description |
+|----------------|----------|---------|-------------|
+| `href`         | yes      | —       | GitHub raw file URL |
+| `linenumbers`  | no       | on      | Show line numbers (`on` / `off`) |
+| `zebrastyle`   | no       | on      | Alternating row background |
+| `theme`        | no       | light   | `light`, `dark`, `blue` |
+
 
 ## Usage
 Insert a GitHub raw file link within a page or other activities:
@@ -43,6 +55,24 @@ or
 ```text
 {githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
 ```
+
+## Compatibility
+- Moodle 4.X
+
+## Limitations
+- Only public GitHub raw URLs are supported
+- Very large files may load slowly depending on server configuratio
+
+## Roadmap
+- [x] Improve zebra‑style rendering  
+- [x] Add optional local caching of GitHub files  
+- [ ] Fix existing themes  
+- [ ] Add additional themes  
+- [ ] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
+- [ ] Enable three‑way code insertion:
+      - current: `{githubcode params}`  
+      - fallback block: `{githubcode params} ... {/githubcode}`  
+      - raw code block: `{rawcode params} ... {/rawcode}`  
 
 ## Version history
 - **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row
