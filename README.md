@@ -66,7 +66,8 @@ or
 ## Roadmap
 - [x] Improve zebra‑style rendering  
 - [x] Add optional local caching of GitHub files  
-- [ ] Fix existing themes  
+- [ ] Fix existing themes
+- [ ] Fix unwanted extra newline in the output
 - [ ] Add additional themes  
 - [ ] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
 - [ ] Enable three‑way code insertion:  
