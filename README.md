@@ -12,10 +12,12 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 
 ## Installation
 1. Clone or download this repository  
-2. Copy the plugin folder into your Moodle installation under:  /filter/githubcode
+2. Copy the plugin folder into your Moodle installation under:  /filter/githubcode or install using zip file
 3. Log in as an administrator and navigate to:  
 **Site administration → Plugins → Manage filters**  
 4. Enable the **GitHub Code Filter**  
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/November7/GitHubCodeFilter)
 
 ## Version history
 - **v0.1** - First working release: [githubcode v0.1.zip](https://github.com/November7/GitHubCodeFilter/blob/main/release/githubcode%20v0.1.zip), based on *highlight.js*  
@@ -48,5 +50,3 @@ or
 ```text
 {githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
 ```
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/November7/GitHubCodeFilter)
