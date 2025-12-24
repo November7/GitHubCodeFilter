@@ -48,3 +48,5 @@ or
 ```text
 {githubcode href=<a href'https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
 ```
+
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/November7/GitHubCodeFilter)
