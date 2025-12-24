@@ -12,7 +12,7 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 - **Directory:** `/filter/githubcode`  
 - **Purpose:** Embed GitHub raw code with syntax highlighting  
 - **Requires:** Moodle 4.x+  
-- **Maintainer:** Marcin (November7)  
+- **Maintainer:** Nov7  
 
 
 ## Features
