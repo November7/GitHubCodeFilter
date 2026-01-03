@@ -148,8 +148,10 @@ define(['jquery'], function($) {
     */
     function lines(code) {
         let lines = code.replace(/\n$/, "").split("\n");
+        lines.pop(); // usuwa ostatnią pustą linię dodaną przez GitHub - fast fix
         let newCode = "";
-        lines.forEach(function(line) {
+        lines.forEach(function(line) 
+        {
             newCode += "<span class='line'>" +  line + "</span>\n";
         });
         return newCode;

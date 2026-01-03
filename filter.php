@@ -47,9 +47,7 @@ class filter_githubcode extends moodle_text_filter
         $text = preg_replace_callback($pattern_raw, function($matches) {
             $inside = trim($matches[1]); // params
             $code   = $matches[2];       // raw code
-
             $params = $this->parse_params($inside);
-
             return $this->render_rawcode_from_content($params, $code);
         }, $text);
 
