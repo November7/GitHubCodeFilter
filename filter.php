@@ -22,6 +22,14 @@ class filter_githubcode extends moodle_text_filter
         // call js engine for syntax highlighting
         $PAGE->requires->js_call_amd('filter_githubcode/syntaxhighlighter', 'init', array($CFG->wwwroot));
 
+        // Hotfix: remove auto-inserted <p> and <br> around rawcode/githubblock
+        $text = preg_replace('/<p>\s*(\{rawcode\b)/i', '$1', $text);
+        $text = preg_replace('/(\{\/rawcode\})\s*<\/p>/i', '$1', $text);
+        $text = preg_replace('/<p>\s*(\{githubblock\b)/i', '$1', $text);
+        $text = preg_replace('/(\{\/githubblock\})\s*<\/p>/i', '$1', $text);        
+        $text = preg_replace('/<\/p>\s*<p>/i', "\n", $text);
+        // end hotfix
+
         // option #1 {githubblock params}fallback{/githubblock}
         $pattern_github_block = '/\{githubblock([^}]*)\}(.*?)\{\/githubblock\}/is';
         $text = preg_replace_callback($pattern_github_block, function($matches) {
@@ -45,8 +53,16 @@ class filter_githubcode extends moodle_text_filter
         // option #2 {rawcode params}kod{/rawcode}
         $pattern_raw = '/\{rawcode([^}]*)\}(.*?)\{\/rawcode\}/is';
         $text = preg_replace_callback($pattern_raw, function($matches) {
-            $inside = trim($matches[1]); // params
-            $code   = $matches[2];       // raw code
+            $inside = trim($matches[1]);
+            $code   = $matches[2];
+
+            // Cleanup of $code: (br, p, nbsp, leading/trailing spaces, etc.)
+            $code = preg_replace('/<br\s*\/?>/i', "\n", $code);
+            $code = str_replace('&nbsp;', ' ', $code);
+            $code = str_replace('&lt;', '<', $code);
+            $code = str_replace('&gt;', '>', $code);
+            $code = preg_replace('/<\/?p[^>]*>/i', '', $code); /// removing <p> tags .... need hotfix!!!!!
+            $code = trim($code, "\n\r ");
             $params = $this->parse_params($inside);
             return $this->render_rawcode_from_content($params, $code);
         }, $text);
