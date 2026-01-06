@@ -82,61 +82,65 @@ define(['jquery'], function($) {
                 .html(code)
         );
 
-        let footer = $("<div>")
-            .addClass("githubcode-footer")
-            .append(
-                $("<span>")
-                    .addClass("zebra-toggle")
-                    .attr("title", "Toggle zebra-style")
-                    .on("click", function() {
-                        $(this).closest(".githubcode-container").toggleClass("zebra-on");
-                    })
-                    .append($("<i>").addClass("fa-solid fa-grip-lines"))                    
-            )
-            .append(
-                $("<span>")
-                    .addClass("lines-toggle")
-                    .attr("title", "Toggle line numbers")
-                    .on("click", function() {
-                        $(this).closest(".githubcode-container").toggleClass("lines-off");
-                    })
-                    .append($("<i>").addClass("fa-solid fa-1"))
-            )
-            .append(
+        let footer = $("<div>").addClass("githubcode-footer");
+  
+        footer.append(
+            $("<span>")
+                .addClass("zebra-toggle")
+                .attr("title", "Toggle zebra-style")
+                .on("click", function () {
+                    $(this).closest(".githubcode-container").toggleClass("zebra-on");
+                })
+                .append($("<i>").addClass("fa-solid fa-grip-lines"))
+        );
+
+        footer.append(
+            $("<span>")
+                .addClass("lines-toggle")
+                .attr("title", "Toggle line numbers")
+                .on("click", function () {
+                    $(this).closest(".githubcode-container").toggleClass("lines-off");
+                })
+                .append($("<i>").addClass("fa-solid fa-1"))
+        );
+        
+        if (attrs["data-href"]) 
+        {    
+            footer.append(
                 $("<span>")
                     .addClass("cache-icon")
-                    .attr("title", "Code fetched from github.com " + attrs['data-age'] + " seconds ago")
-                    .append(
-                        $("<i>").addClass("fa-regular fa-clock")
-                    )
-                    .on("click", function() {
+                    .attr("title", "Code fetched from github.com " + attrs["data-age"] + " seconds ago")
+                    .append($("<i>").addClass("fa-regular fa-clock"))
+                    .on("click", function () {
                         let $icon = $(this);
                         let text = $icon.attr("title");
                         let $label = $icon.find(".cache-label");
+
                         if ($label.length) {
                             $label.remove();
                         } else {
                             $icon.append(
                                 $("<span>")
                                     .addClass("cache-label")
-                                    .css({"margin-left":"6px"})
+                                    .css({ "margin-left": "6px" })
                                     .text(text)
                             );
                         }
                     })
-            )
-            .append(
+            );
+            
+            footer.append(
                 $("<span>")
                     .addClass("source-link")
-                    .html(
+                    .append(
                         $("<a>")
-                            .attr("href", attrs['data-href'] || "#")
+                            .attr("href", attrs["data-href"])
                             .attr("target", "_blank")
                             .attr("rel", "noopener noreferrer")
                             .append($("<i>").addClass("fa-solid fa-anchor"))
                     )
             );
-            
+        }            
         container.append(header, codeBlock,  footer);
         return container;
     }

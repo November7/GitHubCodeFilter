@@ -55,7 +55,6 @@ code.githubcode span.line::before {
 .githubcode-footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 4px 8px;
     font-family: sans-serif;
     font-size: 13px;
@@ -77,10 +76,11 @@ code.githubcode span.line::before {
     font-size: 10px;
 }
 
-.githubcode-footer .zebra-toggle,
-.githubcode-footer .lines-toggle,
-.githubcode-footer .cache-icon {
-    margin-right: 10px;
+.githubcode-footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
 }
 
 .githubcode-footer .source-link {
