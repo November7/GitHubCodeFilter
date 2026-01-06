@@ -72,9 +72,9 @@ or
 - [ ] Add additional themes  
 - [x] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
 - [x] Enable three‑way code insertion (version pre-alpha):  
-      - [x] current: `{githubcode params}`
-      - [x] fallback block: `{githubblock params} fallback block {/githubblock}`  
-      - [x] raw code block: `{rawcode params} inserted code block {/rawcode}` 
+      - current: `{githubcode params}`  
+      - fallback block: `{githubblock params} fallback block {/githubblock}`  
+      - raw code block: `{rawcode params} inserted code block {/rawcode}`  
 - [ ] Remove link to code in github.com on rawcode mode
  
 
