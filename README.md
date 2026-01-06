@@ -67,13 +67,15 @@ or
 - [x] Improve zebra‑style rendering  
 - [x] Add optional local caching of GitHub files  
 - [ ] Fix existing themes
-- [ ] Fix unwanted extra newline in the output
+- [x] Fix unwanted extra newline in the output
 - [ ] Add additional themes  
-- [ ] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
-- [ ] Enable three‑way code insertion:  
-      - current: `{githubcode params}`  
-      - fallback block: `{githubcode params} fallback block {/githubcode}`  
-      - raw code block: `{rawcode params} inserted code block {/rawcode}`  
+- [x] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
+- [x] Enable three‑way code insertion (version pre-alpha):  
+      - [x] current: `{githubcode params}`
+      - [x] fallback block: `{githubblock params} fallback block {/githubblock}`  
+      - [x] raw code block: `{rawcode params} inserted code block {/rawcode}` 
+- [ ] Remove link to code in github.com on rawcode mode
+ 
 
 ## Version history
 - **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row

@@ -58,17 +58,13 @@ class filter_githubcode extends moodle_text_filter
 
             // Cleanup of $code: (br, p, nbsp, leading/trailing spaces, etc.)
             $code = preg_replace('/<br\s*\/?>/i', "\n", $code);
-            $code = str_replace('&nbsp;', ' ', $code);
-            $code = str_replace('&lt;', '<', $code);
-            $code = str_replace('&gt;', '>', $code);
-            $code = preg_replace('/<\/?p[^>]*>/i', '', $code); /// removing <p> tags .... need hotfix!!!!!
+            $code = html_entity_decode($code, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $code = trim($code, "\n\r ");
             $params = $this->parse_params($inside);
             return $this->render_rawcode_from_content($params, $code);
         }, $text);
 
         // option #3 {githubcode params}
-        //    Zostawiamy go dla kompatybilności wstecznej.
         $pattern_single = '/\{githubcode\s+([^}]+)\}/i';
         $text = preg_replace_callback($pattern_single, function($matches) {
             $inside = $matches[1];
