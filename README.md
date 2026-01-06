@@ -32,16 +32,16 @@ The **GitHub Code Filter** plugin allows Moodle course creators to embed source 
 4. Navigate to: **Site administration → Plugins → Manage filters**  
 5. Enable **GitHub Code Filter**
 
-## Available parameters
+## Available parameters 
 | Parameter      | Required | Default | Description |
 |----------------|----------|---------|-------------|
-| `href`         | yes      | —       | GitHub raw file URL |
+| `href`         | yes {gtihubcode} & {githubblock}     | —       | GitHub raw file URL |
 | `linenumbers`  | no       | on      | Show line numbers (`on` / `off`) |
 | `zebrastyle`   | no       | on      | Alternating row background |
 | `theme`        | no       | light   | `light`, `dark`, `blue` |
 
 
-## Usage
+## Usage {githubcode}
 Insert a GitHub raw file link within a page or other activities:
 
 ```text
@@ -54,6 +54,16 @@ or
 or
 ```text
 {githubcode href=<a href='https://raw.githubusercontent.com/user/repo/main/example.cpp'>...</a> linenumbers=off theme=dark zebrastyle=off}
+```
+
+## Usage {rawcode}
+```text
+{rawcode linenumbers=off theme=dark zebrastyle=off} multiline raw code {/rawcode}
+```
+
+## Usage {githubblock}
+```text
+{githubblock href=raw.githubusercontent.com/user/repo/main/example.cpp linenumbers=off theme=dark zebrastyle=off}fallback code as rawcode{/githubblock}
 ```
 
 ## Compatibility
@@ -71,14 +81,15 @@ or
 - [x] Fix unwanted extra newline in the output
 - [ ] Add additional themes  
 - [x] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
-- [x] Enable three‑way code insertion (version pre-alpha):  
+- [x] Enable three‑way code insertion:  
       - current: `{githubcode params}`  
       - fallback block: `{githubblock params} fallback block {/githubblock}`  
       - raw code block: `{rawcode params} inserted code block {/rawcode}`  
-- [ ] Remove link to code in github.com on rawcode mode
+- [x] Remove link to code in github.com on rawcode mode
  
 
 ## Version history
+- **v1.1.5** - three‑way code insertion: `{githubcode params}`, fallback block: `{githubblock params} fallback block {/githubblock}`, raw code block: `{rawcode params} inserted code block {/rawcode}`
 - **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row
 - **v1.0.1** - New option in plugin settings: default theme. 
 - **v1.0.0** - Stable version, based on custom engine. Known issues: multi-word title.
