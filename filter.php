@@ -153,7 +153,7 @@ class filter_githubcode extends moodle_text_filter
                 {
                     $code = $fallback;
                     $age  = 0;
-                    return $this->render_code_common($code, $params, $age, $url);
+                    return $this->render_code_common($code, $params, $age, '');
                 }
 
                 $safeUrl = htmlspecialchars($url);
