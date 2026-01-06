@@ -67,6 +67,7 @@ or
 - [x] Improve zebra‑style rendering  
 - [x] Add optional local caching of GitHub files  
 - [ ] Fix existing themes
+- [ ] Fix multi-word title
 - [x] Fix unwanted extra newline in the output
 - [ ] Add additional themes  
 - [x] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
