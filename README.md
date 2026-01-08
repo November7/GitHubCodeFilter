@@ -77,20 +77,22 @@ fallback code as a rawcode
 - Only public GitHub raw URLs are supported
 - Very large files may load slowly depending on server configuratio
 
-## Roadmap
-- [x] Improve zebra‑style rendering  
-- [x] Add optional local caching of GitHub files  
+## Roadmap (improvements & bug fixes)
+- [x] Improve zebra‑style rendering
+- [x] Add optional local caching of GitHub files
 - [ ] Fix existing themes
-- [ ] Fix multi-word title
+- [ ] Fix multi‑word title handling
 - [x] Fix unwanted extra newline in the output
-- [ ] Add additional themes  
+- [ ] Add additional themes
 - [x] Add `{rawcode}...{/rawcode}` feature (allow inserting raw code directly into Moodle content)  
 - [x] Enable three‑way code insertion:  
       - current: `{githubcode params}`  
       - fallback block: `{githubblock params} fallback block {/githubblock}`  
       - raw code block: `{rawcode params} inserted code block {/rawcode}`  
-- [x] Remove link to code in github.com on rawcode mode
- 
+- [x] Remove link to code on GitHub in rawcode mode
+- [ ] Add padding to the githubcode container
+- [ ] Add lang attribute
+- [ ] Improve HTML rendering and add safeguards against unclosed HTML tags
 
 ## Version history
 - **v1.1.5** - three‑way code insertion: `{githubcode params}`, fallback block: `{githubblock params} fallback block {/githubblock}`, raw code block: `{rawcode params} inserted code block {/rawcode}`
