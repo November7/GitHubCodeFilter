@@ -58,12 +58,16 @@ or
 
 ## Usage {rawcode}
 ```text
-{rawcode linenumbers=off theme=dark zebrastyle=off} multiline raw code {/rawcode}
+{rawcode linenumbers=off theme=dark zebrastyle=off}
+multiline raw code
+{/rawcode}
 ```
 
 ## Usage {githubblock}
 ```text
-{githubblock href=raw.githubusercontent.com/user/repo/main/example.cpp linenumbers=off theme=dark zebrastyle=off}fallback code as rawcode{/githubblock}
+{githubblock href=raw.githubusercontent.com/user/repo/main/example.cpp linenumbers=off theme=dark zebrastyle=off}
+fallback code as a rawcode
+{/githubblock}
 ```
 
 ## Compatibility
