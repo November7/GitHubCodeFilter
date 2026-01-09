@@ -26,11 +26,11 @@ class filter_githubcode extends moodle_text_filter
         // for testing purposes only – may be removed later
         // issue: removed all paragraphs, breaking layout!!!!!!!
         // need to be fixed properly later
-        $text = preg_replace('/<p>\s*(\{rawcode\b)/i', '$1', $text);
-        $text = preg_replace('/(\{\/rawcode\})\s*<\/p>/i', '$1', $text);
-        $text = preg_replace('/<p>\s*(\{githubblock\b)/i', '$1', $text);
-        $text = preg_replace('/(\{\/githubblock\})\s*<\/p>/i', '$1', $text);        
-        $text = preg_replace('/<\/p>\s*<p>/i', "\n", $text); // ????????
+        // $text = preg_replace('/<p>\s*(\{rawcode\b\s*\})\s*<\/p>/i', '$1', $text);
+        // $text = preg_replace('/<p>\s*(\{\/rawcode\})\s*<\/p>/i', '$1', $text);
+        // $text = preg_replace('/<p>\s*(\{githubblock\b)/i', '$1', $text);
+        // $text = preg_replace('/(\{\/githubblock\})\s*<\/p>/i', '$1', $text);        
+        // $text = preg_replace('/<\/p>\s*<p>/i', "\n", $text); // ????????
         // end hotfix
 
         // option #1 {githubblock params}fallback{/githubblock}
@@ -61,6 +61,8 @@ class filter_githubcode extends moodle_text_filter
 
             // Cleanup of $code: (br, p, nbsp, leading/trailing spaces, etc.)
             $code = preg_replace('/<br\s*\/?>/i', "\n", $code);
+            $code = preg_replace('/^<p>(.*?)$/m', '$1', $code);
+            $code = preg_replace('/^(.*?)<\/p>\s*$/m', '$1', $code);
             $code = html_entity_decode($code, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             $code = trim($code, "\n\r ");
             $params = $this->parse_params($inside);
@@ -206,11 +208,11 @@ class filter_githubcode extends moodle_text_filter
                 'cpp'  => 'cpp',
                 'cs'   => 'cs',
                 'js'   => 'javascript',
-                // 'java' => 'java',
+                'java' => 'java',
                 'html' => 'javascript',
                 'htm'  => 'javascript',
-                // 'php'  => 'php',
-                // 'pas'  => 'pascal'
+                'php'  => 'php',
+                'pas'  => 'pascal'
             ];
             if (isset($map[$ext])) 
             {

@@ -90,9 +90,11 @@ fallback code as a rawcode
       - fallback block: `{githubblock params} fallback block {/githubblock}`  
       - raw code block: `{rawcode params} inserted code block {/rawcode}`  
 - [x] Remove link to code on GitHub in rawcode mode
-- [ ] Add padding to the githubcode container
+- [x] Fix padding to the githubcode container
+- [x] Add support for additional programming languages
 - [ ] Add lang attribute
-- [ ] Improve HTML rendering and add safeguards against unclosed HTML tags
+- [ ] Improve HTML rendering and add safeguards against unclosed HTML tags  
+- [ ] Implementing support for embedding pseudocode using the {pseudocode params} … {/pseudocode} multiline block.  
 
 ## Version history
 - **v1.1.5** - three‑way code insertion: `{githubcode params}`, fallback block: `{githubblock params} fallback block {/githubblock}`, raw code block: `{rawcode params} inserted code block {/rawcode}`

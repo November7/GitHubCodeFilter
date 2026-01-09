@@ -140,7 +140,7 @@ define(['jquery'], function($) {
                             .append($("<i>").addClass("fa-solid fa-anchor"))
                     )
             );
-        }            
+        }
         container.append(header, codeBlock,  footer);
         return container;
     }
@@ -234,6 +234,7 @@ define(['jquery'], function($) {
                     );
                     let parsedCode = lines(safeCode);
                     let newCode = final(parsedCode, extractedCode.classes, extractedCode.attrs);
+                  
                     $(this).replaceWith(newCode);
                 }.bind(this));
             });
