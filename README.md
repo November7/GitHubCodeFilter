@@ -97,6 +97,7 @@ fallback code as a rawcode
 - [ ] Implementing support for embedding pseudocode using the {pseudocode params} … {/pseudocode} multiline block.  
 
 ## Version history
+- **v1.1.8** - Fix some bugs and improve functionality
 - **v1.1.5** - three‑way code insertion: `{githubcode params}`, fallback block: `{githubblock params} fallback block {/githubblock}`, raw code block: `{rawcode params} inserted code block {/rawcode}`
 - **v1.0.2** - New options in plugin settings: default linenumbers, default zebra-style row
 - **v1.0.1** - New option in plugin settings: default theme. 
